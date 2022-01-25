@@ -1,9 +1,9 @@
-package com.revature.utils;
+package com.revature.models;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EncryptionUtil {
+public class Encryption {
 
     public static String stringToMD5(String s) {
         final byte[] defaultBytes = s.getBytes();

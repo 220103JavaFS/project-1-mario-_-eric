@@ -13,7 +13,7 @@ public class App {
     public static void main(String[] args) {
         app = Javalin.create();
 
-        configure(new ReimbursementController(), new LoginController());
+        configure(new ReimbursementController());
 
         app.start();
         log.info("started the app!");
