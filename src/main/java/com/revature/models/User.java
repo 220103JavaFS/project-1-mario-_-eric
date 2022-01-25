@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class User {
 
-    private enum UserRole {
+    public enum UserRole {
         Employee, Manager
     }
     // enum.values() is expensive in performance, so we cache the values once across instances
@@ -20,6 +20,11 @@ public class User {
     private int userRoleId;
 
     public User() {}
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public User(int id, String username, String password, String firstName, String lastName, String email, int userRoleId) {
         Id = id;
