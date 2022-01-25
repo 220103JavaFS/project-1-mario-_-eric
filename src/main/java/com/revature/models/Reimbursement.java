@@ -32,6 +32,8 @@ public class Reimbursement {
 
     public Reimbursement() {  }
 
+
+
     public Reimbursement(double amount, Timestamp dateSubmitted, Timestamp dateResolved,
                          String description, int authorId, int resolverId, int statusId, int typeId) {
         this.id = id;

@@ -29,10 +29,10 @@ public class ReimbursementService {
         return new ArrayList<>();
     }
 
-    public Reimbursement getByReimbursementId(int id){
+    public List<Reimbursement> getByReimbursementId(int authorId){
         // Makes sure user ID is valid
-        if (id > 0){
-            return reimbursementDAO.get(id);
+        if (authorId > 0){
+            return reimbursementDAO.getAllByUserId(authorId);
         }
         return null;
     }
