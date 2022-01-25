@@ -5,10 +5,7 @@ import com.revature.utils.ConnectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +25,30 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
     @Override
     public boolean save(Reimbursement r) {
-        return false;
+
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved" +
+                    "reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+            int count = 0;
+            statement.setDouble(++count, r.getAmount());
+            statement.setTimestamp(++count, r.getDateSubmitted());
+            statement.setTimestamp(++count, r.getDateResolved());
+            statement.setString(++count, r.getDescription());
+            statement.setInt(++count, r.getAuthorId());
+            statement.setInt(++count, r.getResolverId());
+            statement.setInt(++count, r.getStatusId());
+            statement.setInt(++count, r.getTypeId());
+
+            statement.execute();
+
+            return true;
+
+        }catch(SQLException e){
+            return false;
+        }
     }
 
     @Override
@@ -71,8 +91,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 Reimbursement reimb = new Reimbursement();
                 reimb.setId(result.getInt("reimb_id"));
                 reimb.setAmount(result.getDouble("reimb_amount"));
-                reimb.setDateSubmitted(result.getString("reimb_submitted"));
-                reimb.setDateResolved(result.getString("reimb_resolved"));
+                reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
+                reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
                 reimb.setDescription(result.getString("reimb-description"));
                 reimb.setAuthorId(result.getInt("reimb_author"));
 

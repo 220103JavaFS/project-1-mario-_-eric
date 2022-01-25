@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -18,8 +19,8 @@ public class Reimbursement {
 
     private int id;
     private double amount;
-    private String dateSubmitted;
-    private String dateResolved;
+    private Timestamp dateSubmitted;
+    private Timestamp dateResolved;
     private String description;
     private byte[] receipt;
     private int authorId;
@@ -31,7 +32,7 @@ public class Reimbursement {
 
     public Reimbursement() {  }
 
-    public Reimbursement(int id, double amount, String dateSubmitted, String dateResolved,
+    public Reimbursement(int id, double amount, Timestamp dateSubmitted, Timestamp dateResolved,
                          String description, int authorId, int resolverId, int statusId, int typeId) {
         this.id = id;
         this.amount = amount;
@@ -63,19 +64,19 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public String getDateSubmitted() {
+    public Timestamp getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(String dateSubmitted) {
+    public void setDateSubmitted(Timestamp dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 
-    public String getDateResolved() {
+    public Timestamp getDateResolved() {
         return dateResolved;
     }
 
-    public void setDateResolved(String dateResolved) {
+    public void setDateResolved(Timestamp dateResolved) {
         this.dateResolved = dateResolved;
     }
 
