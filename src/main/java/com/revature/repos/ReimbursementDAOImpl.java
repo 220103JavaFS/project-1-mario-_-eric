@@ -38,7 +38,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     public boolean delete(int id) {
         try(Connection conn = ConnectionUtil.getConnection()) {
 
-            StringBuffer sql = new StringBuffer("DELETE FROM customer_orders WHERE order_id = " + id + ";");
+            StringBuffer sql = new StringBuffer("DELETE FROM ers_reimbursement WHERE reimb_id = " + id + " CASCADE;");
             Statement statement = conn.createStatement();
 
             statement.executeUpdate(sql.toString());
