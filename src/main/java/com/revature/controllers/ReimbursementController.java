@@ -65,10 +65,33 @@ public class ReimbursementController implements Controller{
         }
     };
 
+    private final Handler updateTicket = ctx -> {
+        User u = SessionUtil.UserValidate(ctx, UserRole.Manager);
+        if (u != null){
+            ReimbursementDTO dto = ctx.bodyAsClass(ReimbursementDTO.class);
+
+            Reimbursement reim = reimbursementService.getById(dto.reimId);
+            if (reim != null) {
+                reim.setStatusId(dto.statusId);
+                reim.setDateResolved(new Timestamp(System.currentTimeMillis()));
+                reim.setResolverId(u.getId());
+
+                if (reimbursementService.updateReimbursement(reim)) {
+                    ctx.status(200);
+                    ctx.json(reim);
+                } else {
+                    ctx.status(400);
+                }
+            }
+
+        }
+    };
+
     @Override
     public void addRoutes(Javalin app) {
         app.get("/reimbursements", viewAllReimbursements);
         app.get("/reimbursements/{statusId}", viewByStatusId);
         app.post("/reimbursements", createTicket);
+        app.put("/reimbursements/", updateTicket);
     }
 }

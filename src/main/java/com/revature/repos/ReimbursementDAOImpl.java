@@ -152,8 +152,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
         try(Connection conn = ConnectionUtil.getConnection()){
             String sql = "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted," +
-                    "reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?);";
+                    "reimb_description, reimb_author, reimb_status_id, reimb_type_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?);";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             int count = 0;
@@ -161,7 +161,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
             statement.setTimestamp(++count, r.getDateSubmitted());
             statement.setString(++count, r.getDescription());
             statement.setInt(++count, r.getAuthorId());
-            statement.setInt(++count, r.getResolverId());
             statement.setInt(++count, r.getStatusId());
             statement.setInt(++count, r.getTypeId());
 
@@ -181,7 +180,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
         try(Connection conn = ConnectionUtil.getConnection()){
             String sql = "UPDATE ers_reimbursement SET reimb_amount = ?, reimb_submitted = ?, " +
                     "reimb_resolved = ?, reimb_description = ?, reimb_receipt = ?," +
-                    " reimb_author = ?, reimb_resolver = ?, reimb_status_id = ?, reimb_type_id = ?;";
+                    " reimb_author = ?, reimb_resolver = ?, reimb_status_id = ?, reimb_type_id = ?" +
+                    "WHERE reimb_id = ?;";
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -195,6 +195,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
             statement.setInt(++count, r.getResolverId());
             statement.setInt(++count, r.getStatusId());
             statement.setInt(++count, r.getTypeId());
+            statement.setInt(++count, r.getId());
 
             statement.execute();
 
@@ -277,8 +278,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setAmount(result.getDouble("reimb_amount"));
                 reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
                 reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
-                reimb.setDescription(result.getString("reimb-description"));
+                reimb.setDescription(result.getString("reimb_description"));
                 reimb.setAuthorId(result.getInt("reimb_author"));
+                reimb.setResolverId(result.getInt("reimb_resolver"));
+                reimb.setStatusId(result.getInt("reimb_status_id"));
+                reimb.setTypeId(result.getInt("reimb_type_id"));
 
                 return reimb;
             }

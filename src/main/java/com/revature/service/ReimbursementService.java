@@ -29,12 +29,23 @@ public class ReimbursementService {
         return new ArrayList<>();
     }
 
-    public List<Reimbursement> getByReimbursementId(int authorId){
+    public Reimbursement getById(int id){
+        if (id > 0){
+            return reimbursementDAO.get(id);
+        }
+        return null;
+    }
+
+    public List<Reimbursement> getByAuthorId(int authorId){
         // Makes sure user ID is valid
         if (authorId > 0){
             return reimbursementDAO.getAllByUserId(authorId);
         }
         return null;
+    }
+
+    public boolean updateReimbursement(Reimbursement r){
+        return reimbursementDAO.update(r);
     }
 
     public boolean saveReimbursement(@NotNull Reimbursement r) {

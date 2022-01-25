@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Reimbursement {
 
     private enum ReimbursementStatus {
-        PENDING, APPROVED, DENIED
+        PENDING, DENIED, APPROVED
     }
 
     private enum ReimbursementType {
@@ -130,6 +130,14 @@ public class Reimbursement {
     public void setTypeId(int typeId) {
         this.typeId = typeId;
         this.type = reimbursementTypeValues[typeId - 1];
+    }
+
+    public ReimbursementStatus getStatus() {
+        return status;
+    }
+
+    public ReimbursementType getType() {
+        return type;
     }
 
     @Override
