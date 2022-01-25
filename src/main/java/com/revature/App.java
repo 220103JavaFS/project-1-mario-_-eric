@@ -23,17 +23,6 @@ public class App {
         app.start();
         log.info("started the app!");
 
-        Reimbursement reim = new Reimbursement(
-                1000.0,
-                new Timestamp(System.currentTimeMillis()),
-                null,
-                "to delete",
-                1,
-                2,
-                1,
-                1
-
-        );
 
     }
 

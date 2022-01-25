@@ -15,12 +15,78 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
     @Override
     public List<Reimbursement> getAllByUserId(int userId) {
-        return null;
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setInt(1, userId);
+
+            ResultSet result = statement.executeQuery();
+
+            List<Reimbursement> list = new ArrayList<>();
+
+            while(result.next()){
+                Reimbursement reimb = new Reimbursement();
+                reimb.setId(result.getInt("reimb_id"));
+                reimb.setAmount(result.getDouble("reimb_amount"));
+                reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
+                reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
+                reimb.setDescription(result.getString("reimb_description"));
+                reimb.setAuthorId(result.getInt("reimb_author"));
+                reimb.setResolverId(result.getInt("reimb_resolver"));
+                reimb.setStatusId(result.getInt("reimb_status_id"));
+                reimb.setTypeId(result.getInt("reimb_type_id"));
+
+
+
+                list.add(reimb);
+            }
+
+            return list;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Reimbursement> getAllByStatus(int statusId) {
-        return null;
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_status_id = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setInt(1, statusId);
+
+            ResultSet result = statement.executeQuery();
+
+            List<Reimbursement> list = new ArrayList<>();
+
+            while(result.next()){
+                Reimbursement reimb = new Reimbursement();
+                reimb.setId(result.getInt("reimb_id"));
+                reimb.setAmount(result.getDouble("reimb_amount"));
+                reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
+                reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
+                reimb.setDescription(result.getString("reimb_description"));
+                reimb.setAuthorId(result.getInt("reimb_author"));
+                reimb.setResolverId(result.getInt("reimb_resolver"));
+                reimb.setStatusId(result.getInt("reimb_status_id"));
+                reimb.setTypeId(result.getInt("reimb_type_id"));
+
+
+
+                list.add(reimb);
+            }
+
+            return list;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -40,8 +106,12 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setAmount(result.getDouble("reimb_amount"));
                 reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
                 reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
-                reimb.setDescription(result.getString("reimb-description"));
+                reimb.setDescription(result.getString("reimb_description"));
                 reimb.setAuthorId(result.getInt("reimb_author"));
+                reimb.setResolverId(result.getInt("reimb_resolver"));
+                reimb.setStatusId(result.getInt("reimb_status_id"));
+                reimb.setTypeId(result.getInt("reimb_type_id"));
+
 
                 return reimb;
             }
@@ -108,7 +178,34 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
     @Override
     public boolean update(Reimbursement r) {
-        return false;
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "UPDATE ers_reimbursement SET reimb_amount = ?, reimb_submitted = ?, " +
+                    "reimb_resolved = ?, reimb_description = ?, reimb_receipt = ?," +
+                    " reimb_author = ?, reimb_resolver = ?, reimb_status_id = ?, reimb_type_id = ?;";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            int count = 0;
+            statement.setDouble(++count, r.getAmount());
+            statement.setTimestamp(++count, r.getDateSubmitted());
+            statement.setTimestamp(++count, r.getDateResolved());
+            statement.setString(++count, r.getDescription());
+            statement.setBytes(++count, r.getReceipt());
+            statement.setInt(++count, r.getAuthorId());
+            statement.setInt(++count, r.getResolverId());
+            statement.setInt(++count, r.getStatusId());
+            statement.setInt(++count, r.getTypeId());
+
+            statement.execute();
+
+            return true;
+
+
+        }catch(SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

@@ -35,9 +35,31 @@ class ReimbursementDAOImplTest {
     }
 
     @Test
-    @Order(2)
+    @Order(7)
     void deleteByTimestamp() {
         assertTrue(reimbursementDAO.deleteByTimestamp(reim.getDateSubmitted()));
         assertNull(reimbursementDAO.getByTimestamp(reim.getDateSubmitted()));
+    }
+
+    @Test
+    @Order(2)
+    void getAllByUserId() {
+        assertFalse(reimbursementDAO.getAllByUserId(reim.getAuthorId()).isEmpty());
+
+    }
+
+    @Test
+    @Order(3)
+    void getAllByStatus() {
+        assertFalse(reimbursementDAO.getAllByStatus(reim.getStatusId()).isEmpty());
+    }
+
+    @Test
+    @Order(4)
+    void updateStatusIdTest() {
+        reim.setStatusId(3);
+        assertTrue(reimbursementDAO.update(reim));
+        Reimbursement r = reimbursementDAO.getByTimestamp(reim.getDateSubmitted());
+        assertEquals(reim.getStatusId(), r.getStatusId());
     }
 }

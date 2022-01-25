@@ -118,7 +118,7 @@ public class Reimbursement {
 
     public void setStatusId(int statusId) {
         this.statusId = statusId;
-        this.status = reimbursementStatusValues[statusId];
+        this.status = reimbursementStatusValues[statusId - 1];
     }
 
     public int getTypeId() {
@@ -127,7 +127,7 @@ public class Reimbursement {
 
     public void setTypeId(int typeId) {
         this.typeId = typeId;
-        this.type = reimbursementTypeValues[typeId];
+        this.type = reimbursementTypeValues[typeId - 1];
     }
 
     @Override
