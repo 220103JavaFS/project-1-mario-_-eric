@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO {
@@ -55,7 +57,34 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
     @Override
     public List<Reimbursement> getAll() {
-        return null;
+
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "SELECT * FROM ers_reimbursement;";
+
+            Statement statement = conn.createStatement();
+
+            ResultSet result = statement.executeQuery(sql);
+
+            List<Reimbursement> list = new ArrayList<>();
+
+            while(result.next()){
+                Reimbursement reimb = new Reimbursement();
+                reimb.setId(result.getInt("reimb_id"));
+                reimb.setAmount(result.getDouble("reimb_amount"));
+                reimb.setDateSubmitted(result.getString("reimb_submitted"));
+                reimb.setDateResolved(result.getString("reimb_resolved"));
+                reimb.setDescription(result.getString("reimb-description"));
+                reimb.setAuthorId(result.getInt("reimb_author"));
+
+                list.add(reimb);
+            }
+
+            return list;
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     @Override
