@@ -24,18 +24,71 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     }
 
     @Override
+    public Reimbursement getByTimestamp(Timestamp t) {
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_submitted = ?; ";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setTimestamp(1, t);
+
+            ResultSet result = statement.executeQuery();
+
+            if(result.next()){
+                Reimbursement reimb = new Reimbursement();
+                reimb.setId(result.getInt("reimb_id"));
+                reimb.setAmount(result.getDouble("reimb_amount"));
+                reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
+                reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
+                reimb.setDescription(result.getString("reimb-description"));
+                reimb.setAuthorId(result.getInt("reimb_author"));
+
+                return reimb;
+            }
+
+            return null;
+
+        }catch (SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean deleteByTimestamp(Timestamp t) {
+        try(Connection conn = ConnectionUtil.getConnection()) {
+
+            String sql = "DELETE FROM ers_reimbursement WHERE reimb_submitted = ?; ";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setTimestamp(1, t);
+
+            statement.execute();
+
+            return true;
+
+        } catch (SQLException e) {
+            log.warn("Error while deleting reimbursement timestamp : " + t);
+            log.error(e.getClass().getName() + ": " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public boolean save(Reimbursement r) {
 
         try(Connection conn = ConnectionUtil.getConnection()){
-            String sql = "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved" +
+            String sql = "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted," +
                     "reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             int count = 0;
             statement.setDouble(++count, r.getAmount());
             statement.setTimestamp(++count, r.getDateSubmitted());
-            statement.setTimestamp(++count, r.getDateResolved());
             statement.setString(++count, r.getDescription());
             statement.setInt(++count, r.getAuthorId());
             statement.setInt(++count, r.getResolverId());
@@ -47,6 +100,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
             return true;
 
         }catch(SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -60,7 +115,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
     public boolean delete(int id) {
         try(Connection conn = ConnectionUtil.getConnection()) {
 
-            StringBuffer sql = new StringBuffer("DELETE FROM ers_reimbursement WHERE reimb_id = " + id + " CASCADE;");
+            StringBuffer sql = new StringBuffer("DELETE FROM ers_reimbursement WHERE reimb_id = " + id + ";");
             Statement statement = conn.createStatement();
 
             statement.executeUpdate(sql.toString());
@@ -109,6 +164,31 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
     @Override
     public Reimbursement get(int id) {
+        try(Connection conn = ConnectionUtil.getConnection()){
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_id = " + id + ";";
+
+            Statement statement = conn.createStatement();
+
+            ResultSet result = statement.executeQuery(sql);
+
+            if(result.next()){
+                Reimbursement reimb = new Reimbursement();
+                reimb.setId(result.getInt("reimb_id"));
+                reimb.setAmount(result.getDouble("reimb_amount"));
+                reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
+                reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
+                reimb.setDescription(result.getString("reimb-description"));
+                reimb.setAuthorId(result.getInt("reimb_author"));
+
+                return reimb;
+            }
+
+            return null;
+
+        }catch (SQLException e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
         return null;
     }
 }

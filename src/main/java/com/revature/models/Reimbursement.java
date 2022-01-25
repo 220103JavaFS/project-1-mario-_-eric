@@ -32,7 +32,7 @@ public class Reimbursement {
 
     public Reimbursement() {  }
 
-    public Reimbursement(int id, double amount, Timestamp dateSubmitted, Timestamp dateResolved,
+    public Reimbursement(double amount, Timestamp dateSubmitted, Timestamp dateResolved,
                          String description, int authorId, int resolverId, int statusId, int typeId) {
         this.id = id;
         this.amount = amount;

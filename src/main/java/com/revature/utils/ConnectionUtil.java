@@ -14,7 +14,7 @@ public class ConnectionUtil {
             e.printStackTrace();
         }
 
-        String url = "jdbc:postgresql://javafs220103.cv71sde9skif.us-west-2.rds.amazonaws.com:5432/project1";
+        String url = "jdbc:postgresql://project-1.cigojrhsanom.us-west-1.rds.amazonaws.com:5432/project1";
         String username = "postgres"; //It is possible and preferable to hide this information in environment variables
         //System.out.println(System.getenv("SQLPassword"));
         String password = "password"; //Those are accessed by System.getenv("var-name");

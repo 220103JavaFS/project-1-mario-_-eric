@@ -32,3 +32,43 @@
 17:54:01.167 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8080/
 17:54:01.167 [] [main] INFO  io.javalin.Javalin - Javalin started in 329ms \o/
 17:54:01.167 [] [main] INFO  com.revature.App - started the app!
+09:01:36.041 [] [Test worker] WARN  c.r.repos.ReimbursementDAOImpl - Error while deleting reimbursement id : 1
+09:01:36.046 [] [Test worker] ERROR c.r.repos.ReimbursementDAOImpl - org.postgresql.util.PSQLException: ERROR: syntax error at or near "CASCADE"
+  Position: 50
+09:10:47.351 [] [main] INFO  io.javalin.Javalin - 
+       __                      __ _            __ __
+      / /____ _ _   __ ____ _ / /(_)____      / // /
+ __  / // __ `/| | / // __ `// // // __ \    / // /_
+/ /_/ // /_/ / | |/ // /_/ // // // / / /   /__  __/
+\____/ \__,_/  |___/ \__,_//_//_//_/ /_/      /_/
+
+          https://javalin.io/documentation
+
+09:10:47.358 [] [main] DEBUG org.eclipse.jetty.util.log - Logging to Logger[org.eclipse.jetty.util.log] via org.eclipse.jetty.util.log.Slf4jLog
+09:10:47.363 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @481ms to org.eclipse.jetty.util.log.Slf4jLog
+09:10:47.364 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+09:10:47.384 [] [main] INFO  io.javalin.Javalin - You are running Javalin 4.1.1 (released October 10, 2021. Your Javalin version is 107 days old. Consider upgrading!).
+09:10:47.384 [] [main] INFO  io.javalin.Javalin - No port specified, starting on port 8080. Call start(port) to change ports.
+09:10:47.708 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8080/
+09:10:47.709 [] [main] INFO  io.javalin.Javalin - Javalin started in 345ms \o/
+09:10:47.709 [] [main] INFO  com.revature.App - started the app!
+09:11:18.643 [] [main] INFO  com.revature.App - started the app!
+09:13:07.273 [] [main] INFO  com.revature.App - started the app!
+09:13:34.345 [] [main] INFO  com.revature.App - started the app!
+09:14:00.843 [] [main] INFO  com.revature.App - started the app!
+09:15:18.067 [] [main] INFO  com.revature.App - started the app!
+09:18:10.379 [] [main] INFO  com.revature.App - started the app!
+09:28:31.406 [] [Test worker] WARN  c.r.repos.ReimbursementDAOImpl - Error while deleting reimbursement timestamp : 2022-01-25 09:28:30.418
+09:28:31.410 [] [Test worker] ERROR c.r.repos.ReimbursementDAOImpl - org.postgresql.util.PSQLException: ERROR: syntax error at or near "09"
+  Position: 66
+09:29:06.632 [] [Test worker] WARN  c.r.repos.ReimbursementDAOImpl - Error while deleting reimbursement timestamp : 2022-01-25 09:29:05.55
+09:29:06.636 [] [Test worker] ERROR c.r.repos.ReimbursementDAOImpl - org.postgresql.util.PSQLException: ERROR: syntax error at or near "09"
+  Position: 66
+09:30:35.023 [] [Test worker] WARN  c.r.repos.ReimbursementDAOImpl - Error while deleting reimbursement timestamp : 2022-01-25 09:30:34.003
+09:30:35.027 [] [Test worker] ERROR c.r.repos.ReimbursementDAOImpl - org.postgresql.util.PSQLException: ERROR: syntax error at or near "09"
+  Position: 66
+09:32:39.678 [] [Test worker] WARN  c.r.repos.ReimbursementDAOImpl - Error while deleting reimbursement timestamp : 2022-01-25 09:32:38.643
+09:32:39.683 [] [Test worker] ERROR c.r.repos.ReimbursementDAOImpl - org.postgresql.util.PSQLException: ERROR: syntax error at or near "09"
+  Position: 66
+09:34:51.614 [] [Test worker] WARN  c.r.repos.ReimbursementDAOImpl - Error while deleting reimbursement timestamp : 2022-01-25 09:34:50.646
+09:34:51.618 [] [Test worker] ERROR c.r.repos.ReimbursementDAOImpl - org.postgresql.util.PSQLException: No results were returned by the query.

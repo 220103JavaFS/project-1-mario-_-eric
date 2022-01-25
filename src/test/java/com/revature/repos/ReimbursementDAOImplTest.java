@@ -16,8 +16,7 @@ class ReimbursementDAOImplTest {
 
     private static ReimbursementDAO reimbursementDAO = new ReimbursementDAOImpl();
     private static Reimbursement reim = new Reimbursement(
-            1,
-            1000,
+            1000.0,
             new Timestamp(System.currentTimeMillis()),
             null,
             "to delete",
@@ -28,19 +27,17 @@ class ReimbursementDAOImplTest {
 
     );
 
-
-    @Test
-    @Order(2)
-    void delete() {
-
-        assertTrue(reimbursementDAO.delete(reim.getId()));
-        assertNull(reimbursementDAO.get(reim.getId()));
-    }
-
     @Test
     @Order(1)
     void save() {
 
         assertTrue(reimbursementDAO.save(reim));
+    }
+
+    @Test
+    @Order(2)
+    void deleteByTimestamp() {
+        assertTrue(reimbursementDAO.deleteByTimestamp(reim.getDateSubmitted()));
+        assertNull(reimbursementDAO.getByTimestamp(reim.getDateSubmitted()));
     }
 }
