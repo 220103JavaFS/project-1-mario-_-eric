@@ -33,7 +33,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.userRole = UserRoleValues[userRoleId];
+        this.userRole = UserRoleValues[userRoleId - 1];
         this.userRoleId = userRoleId;
     }
 
@@ -100,7 +100,7 @@ public class User {
 
     public void setUserRoleId(int userRoleId) {
         this.userRoleId = userRoleId;
-        this.userRole = UserRoleValues[userRoleId];
+        this.userRole = UserRoleValues[userRoleId - 1];
     }
 
     @Override

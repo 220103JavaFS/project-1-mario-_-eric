@@ -58,8 +58,19 @@ class ReimbursementDAOImplTest {
     @Order(4)
     void updateStatusIdTest() {
         reim.setStatusId(3);
+        reim.setResolverId(2);
+        reim.setDateResolved(new Timestamp(System.currentTimeMillis()));
         assertTrue(reimbursementDAO.update(reim));
         Reimbursement r = reimbursementDAO.getByTimestamp(reim.getDateSubmitted());
         assertEquals(reim.getStatusId(), r.getStatusId());
+        assertEquals(reim.getResolverId(), r.getResolverId());
+        assertEquals(reim.getDateResolved(), r.getDateResolved());
+    }
+
+    @Test
+    @Order(5)
+    void getAllReimbursements(){
+
+        assertFalse(reimbursementDAO.getAll().isEmpty());
     }
 }

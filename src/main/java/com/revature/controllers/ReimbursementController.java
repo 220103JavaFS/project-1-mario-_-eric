@@ -25,8 +25,21 @@ public class ReimbursementController implements Controller{
         }
     };
 
+    private final Handler viewByStatusId = ctx -> {
+        User u = SessionUtil.UserValidate(ctx, UserRole.Manager);
+        if (u != null) {
+            String idString = ctx.pathParam("statusId");
+            int statusId = Integer.parseInt(idString);
+
+            List<Reimbursement> rem_list = reimbursementService.getReimbursementsByStatusId(statusId);
+            ctx.json(rem_list);
+            ctx.status(200);
+        }
+    };
+
     @Override
     public void addRoutes(Javalin app) {
-        app.post("/reimbursements", viewAllReimbursements);
+        app.get("/reimbursements", viewAllReimbursements);
+        app.get("/reimbursements/{statusId}", viewByStatusId);
     }
 }

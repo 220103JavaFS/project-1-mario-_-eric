@@ -25,7 +25,7 @@ public class LoginController implements Controller{
             if (loginService.validateAccount(u)) {
                 User db_user = userService.getUserByUsername(dto.username);
                 ctx.req.getSession().setAttribute("user", db_user);
-                ctx.json(u);
+                ctx.json(db_user);
                 ctx.status(200);
             } else {
                 ctx.status(400);

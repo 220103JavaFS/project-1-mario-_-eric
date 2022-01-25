@@ -5,6 +5,7 @@ import com.revature.repos.ReimbursementDAO;
 import com.revature.repos.ReimbursementDAOImpl;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReimbursementService {
@@ -19,6 +20,13 @@ public class ReimbursementService {
             return reimbursementDAO.getAllByUserId(userId);
         }
         return null;
+    }
+
+    public List<Reimbursement> getReimbursementsByStatusId(int statusId){
+        if (statusId > 0){
+            return reimbursementDAO.getAllByStatus(statusId);
+        }
+        return new ArrayList<>();
     }
 
     public Reimbursement getByReimbursementId(int id){

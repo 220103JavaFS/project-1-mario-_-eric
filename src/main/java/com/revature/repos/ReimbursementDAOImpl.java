@@ -245,8 +245,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setAmount(result.getDouble("reimb_amount"));
                 reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
                 reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
-                reimb.setDescription(result.getString("reimb-description"));
+                reimb.setDescription(result.getString("reimb_description"));
                 reimb.setAuthorId(result.getInt("reimb_author"));
+                reimb.setResolverId(result.getInt("reimb_resolver"));
+                reimb.setStatusId(result.getInt("reimb_status_id"));
+                reimb.setTypeId(result.getInt("reimb_type_id"));
 
                 list.add(reimb);
             }

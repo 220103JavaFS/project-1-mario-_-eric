@@ -18,7 +18,7 @@ public class LoginService {
             return false;
         }
         // Checks if passwords match
-        if (db_user.getPassword().equals(a.getPassword())){
+        if (!db_user.getPassword().equals(a.getPassword())){
             return false;
         }
         return true;

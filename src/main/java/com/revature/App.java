@@ -18,7 +18,8 @@ public class App {
     public static void main(String[] args) {
         app = Javalin.create();
 
-        configure(new ReimbursementController());
+        configure(new ReimbursementController(),
+                new LoginController());
 
         app.start();
         log.info("started the app!");
