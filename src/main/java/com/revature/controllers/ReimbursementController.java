@@ -6,7 +6,6 @@ import io.javalin.Javalin;
 
 import io.javalin.http.Handler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReimbursementController implements Controller{

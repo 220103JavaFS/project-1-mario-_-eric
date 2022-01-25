@@ -15,3 +15,20 @@
 15:04:48.800 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8080/
 15:04:48.801 [] [main] INFO  io.javalin.Javalin - Javalin started in 1210ms \o/
 15:04:48.801 [] [main] INFO  com.revature.App - started the app!
+17:54:00.824 [] [main] INFO  io.javalin.Javalin - 
+       __                      __ _            __ __
+      / /____ _ _   __ ____ _ / /(_)____      / // /
+ __  / // __ `/| | / // __ `// // // __ \    / // /_
+/ /_/ // /_/ / | |/ // /_/ // // // / / /   /__  __/
+\____/ \__,_/  |___/ \__,_//_//_//_/ /_/      /_/
+
+          https://javalin.io/documentation
+
+17:54:00.833 [] [main] DEBUG org.eclipse.jetty.util.log - Logging to Logger[org.eclipse.jetty.util.log] via org.eclipse.jetty.util.log.Slf4jLog
+17:54:00.837 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @407ms to org.eclipse.jetty.util.log.Slf4jLog
+17:54:00.839 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+17:54:00.877 [] [main] INFO  io.javalin.Javalin - You are running Javalin 4.1.1 (released October 10, 2021. Your Javalin version is 106 days old. Consider upgrading!).
+17:54:00.877 [] [main] INFO  io.javalin.Javalin - No port specified, starting on port 8080. Call start(port) to change ports.
+17:54:01.167 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8080/
+17:54:01.167 [] [main] INFO  io.javalin.Javalin - Javalin started in 329ms \o/
+17:54:01.167 [] [main] INFO  com.revature.App - started the app!
