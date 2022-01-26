@@ -10,7 +10,14 @@ import java.util.List;
 
 public class ReimbursementService {
 
-    private ReimbursementDAO reimbursementDAO = new ReimbursementDAOImpl();
+    private ReimbursementDAO reimbursementDAO;
+
+    public ReimbursementService(ReimbursementDAO reimbursementDAO) {
+        this.reimbursementDAO = reimbursementDAO;
+    }
+
+    public ReimbursementService() {
+    }
 
     public List<Reimbursement> getAllReimbursements() { return reimbursementDAO.getAll(); }
 

@@ -1,16 +1,17 @@
 package com.revature.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
 
     public enum UserRole {
         Employee, Manager
     }
     // enum.values() is expensive in performance, so we cache the values once across instances
-    private static final UserRole UserRoleValues[] = UserRole.values();
+    private static final UserRole[] UserRoleValues = UserRole.values();
 
-    private int Id;
+    private int id;
     private String username;
     private String password;
     private String firstName;
@@ -27,7 +28,7 @@ public class User {
     }
 
     public User(int id, String username, String password, String firstName, String lastName, String email, int userRoleId) {
-        Id = id;
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -38,11 +39,11 @@ public class User {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -108,18 +109,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Id == user.Id && userRoleId == user.userRoleId && username.equals(user.username) && password.equals(user.password) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && userRole == user.userRole;
+        return id == user.id && userRoleId == user.userRoleId && username.equals(user.username) && password.equals(user.password) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && userRole == user.userRole;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, username, password, firstName, lastName, email, userRole, userRoleId);
+        return Objects.hash(id, username, password, firstName, lastName, email, userRole, userRoleId);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +

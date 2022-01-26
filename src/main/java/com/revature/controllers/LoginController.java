@@ -22,10 +22,10 @@ public class LoginController implements Controller{
             dto.password = Encryption.stringToMD5(dto.password);
             User u = new User(dto.username, dto.password);
 
-            if (loginService.validateAccount(u)) {
-                User db_user = userService.getUserByUsername(dto.username);
-                ctx.req.getSession().setAttribute("user", db_user);
-                ctx.json(db_user);
+            User dbUser = loginService.validateAccount(u.getUsername(), u.getPassword());
+            if (dbUser != null) {
+                ctx.req.getSession().setAttribute("user", dbUser);
+                ctx.json(dbUser);
                 ctx.status(200);
             } else {
                 ctx.status(400);

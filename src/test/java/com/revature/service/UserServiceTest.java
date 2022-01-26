@@ -2,7 +2,6 @@ package com.revature.service;
 
 import com.revature.models.User;
 import com.revature.repos.UserDAO;
-import com.revature.repos.UserDAOImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -13,27 +12,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceTest {
 
-    public UserService testInstance;
-    //@Mock
+    private UserService serviceInstance;
+
+    @Mock
+    private UserDAO mockedDAO;
+
     private User testUser = new User();
 
     @BeforeEach
     void setUp(){
-        //testUser = mockedDAO.getUserByUsername("marioj");
-        //testUser.setUsername("marioj");
-        //MockitoAnnotations.openMocks(this);
-        testInstance = new UserService();
-        //Mockito.when(mockedDAO.getUserByUsername("marioj")).thenReturn(testUser);
+        testUser.setUsername("marioj");
+        MockitoAnnotations.openMocks(this);
+        serviceInstance = new UserService(mockedDAO);
+        Mockito.when(mockedDAO.getUserByUsername("marioj")).thenReturn(testUser);
     }
 
     @Test
-    void getUserByUsername() {
+    void getUserByUsernameSuccess() {
+        assertNotNull(serviceInstance.getUserByUsername("marioj"));
+    }
 
-        assertNotNull(testInstance.getUserByUsername("marioj"));
-//        System.out.println(testUser);
-//        User test_user = mockedDAO.getUserByUsername("marioj");
-//        System.out.println(test_user);
-//        assertEquals(testUser, test_user);
+    @Test
+    void getUserByUsernameFail() {
+        assertNull(serviceInstance.getUserByUsername("thiswillbenull"));
     }
 
     @Test
