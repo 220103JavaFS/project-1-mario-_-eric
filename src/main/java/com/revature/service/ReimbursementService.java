@@ -50,11 +50,11 @@ public class ReimbursementService {
 
     public boolean saveReimbursement(@NotNull Reimbursement r) {
         // Validates amount
-        if (r.getAmount() == 0) {
+        if (r.getAmount() < 1) {
             return false;
         }
         // Validates user
-        if (r.getAuthorId() == 0) {
+        if (r.getAuthorId() < 1) {
             return false;
         }
 
