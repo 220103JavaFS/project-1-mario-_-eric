@@ -8997,3 +8997,20 @@ java.util.concurrent.TimeoutException: Idle timeout expired: 30002/30000 ms
 14:43:36.702 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8080/
 14:43:36.702 [] [main] INFO  io.javalin.Javalin - Javalin started in 1328ms \o/
 14:43:36.702 [] [main] INFO  com.revature.App - started the app!
+12:40:10.909 [] [main] INFO  io.javalin.Javalin - 
+       __                      __ _            __ __
+      / /____ _ _   __ ____ _ / /(_)____      / // /
+ __  / // __ `/| | / // __ `// // // __ \    / // /_
+/ /_/ // /_/ / | |/ // /_/ // // // / / /   /__  __/
+\____/ \__,_/  |___/ \__,_//_//_//_/ /_/      /_/
+
+          https://javalin.io/documentation
+
+12:40:10.915 [] [main] DEBUG org.eclipse.jetty.util.log - Logging to Logger[org.eclipse.jetty.util.log] via org.eclipse.jetty.util.log.Slf4jLog
+12:40:10.919 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @423ms to org.eclipse.jetty.util.log.Slf4jLog
+12:40:10.920 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+12:40:10.941 [] [main] INFO  io.javalin.Javalin - You are running Javalin 4.1.1 (released October 10, 2021. Your Javalin version is 109 days old. Consider upgrading!).
+12:40:10.941 [] [main] INFO  io.javalin.Javalin - No port specified, starting on port 8080. Call start(port) to change ports.
+12:40:11.105 [] [main] ERROR io.javalin.Javalin - Failed to start Javalin
+12:40:11.106 [] [main] INFO  io.javalin.Javalin - Stopping Javalin ...
+12:40:11.111 [] [main] INFO  io.javalin.Javalin - Javalin has stopped

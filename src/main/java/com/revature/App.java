@@ -21,7 +21,7 @@ public class App {
         configure(new ReimbursementController(),
                 new LoginController());
 
-        app.start();
+        app.start(7001);
         log.info("started the app!");
 
 

@@ -17,9 +17,12 @@ public class ReimbursementService {
     }
 
     public ReimbursementService() {
+        this.reimbursementDAO = new ReimbursementDAOImpl();
     }
 
-    public List<Reimbursement> getAllReimbursements() { return reimbursementDAO.getAll(); }
+    public List<Reimbursement> getAllReimbursements() {
+        return reimbursementDAO.getAll();
+    }
 
     public List<Reimbursement> getByUserId(int userId){
         // Makes sure user ID is valid
