@@ -25,6 +25,8 @@ public class Reimbursement {
     private byte[] receipt;
     private int authorId;
     private int resolverId;
+    private String fullNameAuthor;
+    private String fullNameResolver;
     private int statusId;
     private ReimbursementStatus status;
     private int typeId;
@@ -48,6 +50,22 @@ public class Reimbursement {
 
         this.status = reimbursementStatusValues[statusId];
         this.type = reimbursementTypeValues[typeId];
+    }
+
+    public String getFullNameAuthor() {
+        return fullNameAuthor;
+    }
+
+    public void setFullNameAuthor(String fullNameAuthor) {
+        this.fullNameAuthor = fullNameAuthor;
+    }
+
+    public String getFullNameResolver() {
+        return fullNameResolver;
+    }
+
+    public void setFullNameResolver(String fullNameResolver) {
+        this.fullNameResolver = fullNameResolver;
     }
 
     public int getId() {

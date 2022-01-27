@@ -1,6 +1,7 @@
 package com.revature.repos;
 
 import com.revature.models.Reimbursement;
+import com.revature.models.User;
 import com.revature.utils.ConnectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import java.util.List;
 public class ReimbursementDAOImpl implements ReimbursementDAO {
 
     private final Logger log = LoggerFactory.getLogger(ReimbursementDAOImpl.class);
+
+    private UserDAO userDAO = new UserDAOImpl();
 
     @Override
     public List<Reimbursement> getAllByUserId(int userId) {
@@ -38,7 +41,20 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setStatusId(result.getInt("reimb_status_id"));
                 reimb.setTypeId(result.getInt("reimb_type_id"));
 
+                String authorName = "";
+                String resolverName = "";
 
+                User userAuthor = userDAO.get(reimb.getAuthorId());
+
+                System.out.println(reimb.getResolverId());
+
+                if(reimb.getResolverId() != 0) {
+                    User userResolver = userDAO.get(reimb.getResolverId());
+                    resolverName += userResolver.getFirstName() + " " + userResolver.getLastName();
+                    reimb.setFullNameResolver(resolverName);
+                }
+                authorName += userAuthor.getFirstName() + " " + userAuthor.getLastName();
+                reimb.setFullNameAuthor(authorName);
 
                 list.add(reimb);
             }
@@ -76,9 +92,20 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setStatusId(result.getInt("reimb_status_id"));
                 reimb.setTypeId(result.getInt("reimb_type_id"));
 
+                String authorName = "";
+                String resolverName = "";
 
+                User userAuthor = userDAO.get(reimb.getAuthorId());
 
-                list.add(reimb);
+                System.out.println(reimb.getResolverId());
+
+                if(reimb.getResolverId() != 0) {
+                    User userResolver = userDAO.get(reimb.getResolverId());
+                    resolverName += userResolver.getFirstName() + " " + userResolver.getLastName();
+                    reimb.setFullNameResolver(resolverName);
+                }
+                authorName += userAuthor.getFirstName() + " " + userAuthor.getLastName();
+                reimb.setFullNameAuthor(authorName);
             }
 
             return list;
@@ -252,6 +279,26 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setStatusId(result.getInt("reimb_status_id"));
                 reimb.setTypeId(result.getInt("reimb_type_id"));
 
+                String authorName = "";
+                String resolverName = "";
+
+                User userAuthor = userDAO.get(reimb.getAuthorId());
+
+                System.out.println(reimb.getResolverId());
+
+                if(reimb.getResolverId() != 0) {
+                    User userResolver = userDAO.get(reimb.getResolverId());
+                    resolverName += userResolver.getFirstName() + " " + userResolver.getLastName();
+                    reimb.setFullNameResolver(resolverName);
+                }
+                authorName += userAuthor.getFirstName() + " " + userAuthor.getLastName();
+                reimb.setFullNameAuthor(authorName);
+
+
+
+
+
+
                 list.add(reimb);
             }
 
@@ -283,6 +330,18 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setResolverId(result.getInt("reimb_resolver"));
                 reimb.setStatusId(result.getInt("reimb_status_id"));
                 reimb.setTypeId(result.getInt("reimb_type_id"));
+
+                String authorName = "";
+                String resolverName = "";
+
+                User userAuthor = userDAO.get(reimb.getAuthorId());
+                User userResolver = userDAO.get(reimb.getResolverId());
+
+                authorName += userAuthor.getFirstName() + " " + userAuthor.getLastName();
+                resolverName += userResolver.getFirstName() + " " + userResolver.getLastName();
+
+                reimb.setFullNameAuthor(authorName);
+                reimb.setFullNameResolver(resolverName);
 
                 return reimb;
             }
