@@ -8963,3 +8963,37 @@ java.util.concurrent.TimeoutException: Idle timeout expired: 30002/30000 ms
 11:52:39.609 [] [qtp1684015092-14] DEBUG org.eclipse.jetty.io.ChannelEndPoint - changeInterests p=false 0->1 for SocketChannelEndPoint@7144902a{l=/0:0:0:0:0:0:0:1:8080,r=/0:0:0:0:0:0:0:1:65476,OPEN,fill=FI,flush=-,to=0/30000}{io=0/1,kio=0,kro=1}->HttpConnection@6dc305a[p=HttpParser{s=START,0 of -1},g=HttpGenerator@38f08095{s=START}]=>HttpChannelOverHttp@5e06ce41{s=HttpChannelState@37ff9fd0{s=IDLE rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0},r=2,c=false/false,a=IDLE,uri=null,age=0}
 11:52:39.610 [] [qtp1684015092-14] DEBUG o.e.jetty.server.HttpConnection - HttpConnection@6dc305a::SocketChannelEndPoint@7144902a{l=/0:0:0:0:0:0:0:1:8080,r=/0:0:0:0:0:0:0:1:65476,OPEN,fill=FI,flush=-,to=0/30000}{io=0/1,kio=0,kro=1}->HttpConnection@6dc305a[p=HttpParser{s=START,0 of -1},g=HttpGenerator@38f08095{s=START}]=>HttpChannelOverHttp@5e06ce41{s=HttpChannelState@37ff9fd0{s=IDLE rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0},r=2,c=false/false,a=IDLE,uri=null,age=0} onFillable exit HttpChannelState@37ff9fd0{s=IDLE rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0} null
 11:52:39.610 [] [qtp1684015092-17] DEBUG org.eclipse.jetty.io.ChannelEndPoint - Key interests updated 0 -> 1 on SocketChannelEndPoint@7144902a{l=/0:0:0:0:0:0:0:1:8080,r=/0:0:0:0:0:0:0:1:65476,OPEN,fill=FI,flush=-,to=1/30000}{io=1/1,kio=1,kro=1}->HttpConnection@6dc305a[p=HttpParser{s=START,0 of -1},g=HttpGenerator@38f08095{s=START}]=>HttpChannelOverHttp@5e06ce41{s=HttpChannelState@37ff9fd0{s=IDLE rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0},r=2,c=false/false,a=IDLE,uri=null,age=0}
+14:43:09.863 [] [main] INFO  io.javalin.Javalin - 
+       __                      __ _            __ __
+      / /____ _ _   __ ____ _ / /(_)____      / // /
+ __  / // __ `/| | / // __ `// // // __ \    / // /_
+/ /_/ // /_/ / | |/ // /_/ // // // / / /   /__  __/
+\____/ \__,_/  |___/ \__,_//_//_//_/ /_/      /_/
+
+          https://javalin.io/documentation
+
+14:43:09.910 [] [main] DEBUG org.eclipse.jetty.util.log - Logging to Logger[org.eclipse.jetty.util.log] via org.eclipse.jetty.util.log.Slf4jLog
+14:43:09.957 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @2336ms to org.eclipse.jetty.util.log.Slf4jLog
+14:43:09.957 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+14:43:10.097 [] [main] INFO  io.javalin.Javalin - You are running Javalin 4.1.1 (released October 10, 2021. Your Javalin version is 108 days old. Consider upgrading!).
+14:43:10.097 [] [main] INFO  io.javalin.Javalin - No port specified, starting on port 8080. Call start(port) to change ports.
+14:43:11.988 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8080/
+14:43:11.988 [] [main] INFO  io.javalin.Javalin - Javalin started in 2031ms \o/
+14:43:11.988 [] [main] INFO  com.revature.App - started the app!
+14:43:35.296 [] [main] INFO  io.javalin.Javalin - 
+       __                      __ _            __ __
+      / /____ _ _   __ ____ _ / /(_)____      / // /
+ __  / // __ `/| | / // __ `// // // __ \    / // /_
+/ /_/ // /_/ / | |/ // /_/ // // // / / /   /__  __/
+\____/ \__,_/  |___/ \__,_//_//_//_/ /_/      /_/
+
+          https://javalin.io/documentation
+
+14:43:35.343 [] [main] DEBUG org.eclipse.jetty.util.log - Logging to Logger[org.eclipse.jetty.util.log] via org.eclipse.jetty.util.log.Slf4jLog
+14:43:35.374 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1943ms to org.eclipse.jetty.util.log.Slf4jLog
+14:43:35.389 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+14:43:35.546 [] [main] INFO  io.javalin.Javalin - You are running Javalin 4.1.1 (released October 10, 2021. Your Javalin version is 108 days old. Consider upgrading!).
+14:43:35.546 [] [main] INFO  io.javalin.Javalin - No port specified, starting on port 8080. Call start(port) to change ports.
+14:43:36.702 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8080/
+14:43:36.702 [] [main] INFO  io.javalin.Javalin - Javalin started in 1328ms \o/
+14:43:36.702 [] [main] INFO  com.revature.App - started the app!
