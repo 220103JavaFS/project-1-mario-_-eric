@@ -17,12 +17,12 @@ public class App {
     private static Logger log = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
-        //app = Javalin.create(); // for running tests through postman
+        app = Javalin.create(); // for running tests through postman
 
-        app = Javalin.create((config)->{
-            config.addStaticFiles("C:\\Users\\flodev\\Desktop\\ProjectOne\\project-1-mario-_-eric\\FrontEnd",
-                    Location.EXTERNAL);
-        });
+//        app = Javalin.create((config)->{
+//            config.addStaticFiles("C:\\Users\\flodev\\Desktop\\ProjectOne\\project-1-mario-_-eric\\FrontEnd",
+//                    Location.EXTERNAL);
+//        });
 
         configure(new ReimbursementController(),
                 new LoginController());

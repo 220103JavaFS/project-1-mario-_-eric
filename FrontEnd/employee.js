@@ -36,7 +36,7 @@ async function loginFunc(){
 async function sendRequest() {
    
 
-    // setting status update choice as value for put request
+    // sending reimbursement request
     let status = {
         
     amount:document.getElementById("amount").value,
