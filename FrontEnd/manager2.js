@@ -93,12 +93,15 @@ function populateRequests(requests){
 
       for(let data in request){
 
-        let td = document.createElement("td");
-        td.innerText = request[data];
-        row.appendChild(td); 
+        //if(request.data === receipt)
+            let td = document.createElement("td");
+            console.log(request[data]);
+            //console.log(data);
+            td.innerText = request[data];
+            row.appendChild(td); 
 
       }
 
-      reimTable.appendChild(row); // fix this!!!
+      reimTable.appendChild(row); 
     }
 }
