@@ -69,9 +69,12 @@ public class ReimbursementController implements Controller{
     private final Handler updateTicket = ctx -> {
         User u = SessionUtil.UserValidate(ctx, UserRole.Manager);
         if (u != null){
+            System.out.println(ctx.body());
+
             ReimbursementDTO dto = ctx.bodyAsClass(ReimbursementDTO.class);
 
             Reimbursement reim = reimbursementService.getById(dto.reimId);
+
             if (reim != null) {
                 reim.setStatusId(dto.statusId);
                 reim.setDateResolved(new Timestamp(System.currentTimeMillis()));

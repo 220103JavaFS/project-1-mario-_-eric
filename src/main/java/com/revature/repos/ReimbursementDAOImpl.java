@@ -297,10 +297,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setFullNameAuthor(authorName);
 
 
-
-
-
-
                 list.add(reimb);
             }
 
@@ -337,13 +333,16 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 String resolverName = "";
 
                 User userAuthor = userDAO.get(reimb.getAuthorId());
-                User userResolver = userDAO.get(reimb.getResolverId());
 
+                System.out.println(reimb.getResolverId());
+
+                if(reimb.getResolverId() != 0) {
+                    User userResolver = userDAO.get(reimb.getResolverId());
+                    resolverName += userResolver.getFirstName() + " " + userResolver.getLastName();
+                    reimb.setFullNameResolver(resolverName);
+                }
                 authorName += userAuthor.getFirstName() + " " + userAuthor.getLastName();
-                resolverName += userResolver.getFirstName() + " " + userResolver.getLastName();
-
                 reimb.setFullNameAuthor(authorName);
-                reimb.setFullNameResolver(resolverName);
 
                 return reimb;
             }

@@ -19,8 +19,13 @@ public class App {
     public static void main(String[] args) {
        // app = Javalin.create(); // for running tests through postman
 
-        app = Javalin.create((config)->{
-            config.addStaticFiles("C:\\Revature\\Project1\\project-1-mario-_-eric\\FrontEnd",
+//        app = Javalin.create((config)->{ // mario run
+//            config.addStaticFiles("C:\\Revature\\Project1\\project-1-mario-_-eric\\FrontEnd",
+//                    Location.EXTERNAL);
+//        });
+
+        app = Javalin.create((config)->{ // eric run
+            config.addStaticFiles("C:\\Users\\flodev\\Desktop\\ProjectOne\\project-1-mario-_-eric\\FrontEnd",
                     Location.EXTERNAL);
         });
 

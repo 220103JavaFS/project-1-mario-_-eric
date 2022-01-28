@@ -48,9 +48,9 @@
         <form>
             <label for="setStatusFilter">Choose a status filter:</label>
             <select id="select2">
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="denied">Denied</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Denied">Denied</option>
             </select>
             <div></div>
                 <button class="btn btn-primary" id="getList">Get List</button> 
@@ -62,7 +62,7 @@
     <div>
         <h3>Update a Reimbursement Request</h3>
         <form>
-            <label for="reimId">Enter the request ID</label>
+            <label type="number" for="reimId">Enter the request ID</label>
             <input type="number" id="reimId" name="reimId" min="0" step="1">
             <br>
             <br>

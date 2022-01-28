@@ -40,20 +40,31 @@ async function setStatus() {
     output = statusUpdate.value;
     document.querySelector('.output').textContent = output;
 
+    let statusId_value = 1;
+
+    if (document.querySelector('#select1').value == "denied"){
+      statusId_value = 2;
+    } else if(document.querySelector('#select1').value == "approved") {
+      statusId_value = 3;
+    } 
+
+    console.log(document.querySelector('#select1').value);
+
     // setting status update choice as value for put request
     let status = {
-        reimId: document.getElementById("reimId"),
-        statusId: statusUpdate.value
+        reimId: parseInt(document.getElementById("reimId").value),
+
+        statusId: statusId_value
     } 
 
 
     let response = await fetch(url + "reimbursements", {
         method:"PUT",
-        body:JSON.stringify(setStatus),
+        body:JSON.stringify(status),
         credentials:"include"
     })
 
-    if(response.status === 201){
+    if(response.status === 200){
         getAllRequests(); 
         console.log("Request status updated successfully!");
     }else {
