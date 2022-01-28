@@ -106,6 +106,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 }
                 authorName += userAuthor.getFirstName() + " " + userAuthor.getLastName();
                 reimb.setFullNameAuthor(authorName);
+
+                list.add(reimb);
             }
 
             return list;
