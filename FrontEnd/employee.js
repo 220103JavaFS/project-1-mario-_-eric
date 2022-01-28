@@ -1,5 +1,5 @@
 let submitBtn = document.getElementById("submitRequest");
-let reimTable = document.getElementById("reimTabl");
+let reimbTable = document.getElementById("reimTable");
 let reimBtn = document.getElementById("getRequests");
 let loginBtn = document.getElementById("loginBtn");
 
@@ -45,10 +45,9 @@ async function sendRequest() {
 
     } 
 
-
     let response = await fetch(url + "reimbursements", {
         method:"POST",
-        body:JSON.stringify(setStatus),
+        body:JSON.stringify(sendRequest),
         credentials:"include"
     })
 
@@ -84,7 +83,7 @@ async function getAllRequests(){
 // create rows and fill them with data from reimbursement request
 function populateRequests(requests){
 
-    reimTable.innerHTML ="";
+    reimbTable.innerHTML ="";
 
     for(let request of requests){
 
