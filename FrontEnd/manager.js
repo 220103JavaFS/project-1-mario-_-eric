@@ -1,3 +1,14 @@
+const url = "http://localhost:7002/"
+
+if (sessionStorage.getItem("userSession") == null){
+    window.location.replace(url + "login.html");
+}else{
+    let user = sessionStorage.getItem("userSession");
+    if(user.userRoledId !== 2){
+        window.location.replace(url + "employee.html");
+    }
+}
+
 let statusUpdate = document.querySelector('#select1');
 let submitBtn = document.getElementById("updateStatusBtn");
 let reimTable = document.getElementById("reimTabl");
@@ -6,34 +17,28 @@ let loginBtn = document.getElementById("loginBtn");
 let filterUpdate = document.getElementById("#select2");
 let getListBtn = document.getElementById("getList");
 
-const userName = "marioj";
-const passWord = "password";
-const url = "http://localhost:7002/"
 
 submitBtn.addEventListener("click", setStatus);
 reimBtn.addEventListener("click", getAllRequests);
-loginBtn.addEventListener("click", loginFunc);
+logoutBtn.addEventListener("click", logoutFunc);
 getListBtn.addEventListener("click", getAllRequestsById);
 
-async function loginFunc(){
-    let user = {
-      username: userName,
-      password: passWord
-    }
+async function logoutFunc(){
+    
   
     let response = await fetch(
-      url+"login",
+      url+"logout",
       {
-        method : "POST",
-        body : JSON.stringify(user),
+        method : "POST",   
         credentials: "include"
       }
     );
   
     if(response.status===200){
-      loginBtn.innerText = ""; 
+        sessionStorage.clear();
+        window.location.replace(url + "login.html");
     }else{
-      console.log("Login unsuccessful. Returned status code of:"+response.status);
+      console.log("Logout unsuccessful. Returned status code of:"+response.status);
     }
 }
 

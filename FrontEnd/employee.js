@@ -1,7 +1,7 @@
 const url = "http://localhost:7002/"
 
 if (sessionStorage.getItem("userSession") == null){
-  window.location.replace(url + "login.html");;
+  window.location.replace(url + "login.html");
 }
 
 let submitBtn = document.getElementById("submitRequest");
@@ -26,9 +26,10 @@ async function logoutFunc(){
     );
   
     if(response.status===200){
-      
+        sessionStorage.clear();
+        window.location.replace(url + "login.html");
     }else{
-      console.log("Login unsuccessful. Returned status code of:"+response.status);
+      console.log("Logout unsuccessful. Returned status code of:"+response.status);
     }
 }
 
