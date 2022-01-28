@@ -3,6 +3,8 @@ let submitBtn = document.getElementById("updateStatusBtn");
 let reimTable = document.getElementById("reimTabl");
 let reimBtn = document.getElementById("getRequests");
 let loginBtn = document.getElementById("loginBtn");
+let filterUpdate = document.getElementById("#select2");
+let getListBtn = document.getElementById("getList");
 
 const userName = "marioj";
 const passWord = "password";
@@ -11,6 +13,7 @@ const url = "http://localhost:7002/"
 submitBtn.addEventListener("click", setStatus);
 reimBtn.addEventListener("click", getAllRequests);
 loginBtn.addEventListener("click", loginFunc);
+getListBtn.addEventListener("click", getAllRequestsById);
 
 async function loginFunc(){
     let user = {
@@ -91,6 +94,32 @@ async function getAllRequests(){
       console.log("Can't get the reimbursement list ??? ugh !!!")
 
     }
+}
+
+// get request for reimbursement list by id
+async function getAllRequestsById(){
+  let statusId_value = 1;
+  
+  if (document.querySelector('#select2').value == "denied"){
+      statusId_value = 2;
+  } else if(document.querySelector('#select2').value == "approved") {
+      statusId_value = 3;
+  } 
+
+  let response = await fetch(url + "reimbursements/" + statusId_value , {
+    credentials:"include"
+  });
+
+  if(response.status === 200){
+
+    let requests = await response.json();
+    populateRequests(requests);
+  
+  } else{
+
+    console.log("Can't get the reimbursement list ??? ugh !!!")
+
+  }
 }
 
 // create rows and fill them with data from reimbursement request

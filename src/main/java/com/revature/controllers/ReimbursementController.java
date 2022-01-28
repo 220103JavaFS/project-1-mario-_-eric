@@ -36,6 +36,7 @@ public class ReimbursementController implements Controller{
     private final Handler viewByStatusId = ctx -> {
         User u = SessionUtil.UserValidate(ctx, UserRole.Manager);
         if (u != null) {
+            System.out.println(ctx.body());
             String idString = ctx.pathParam("statusId");
             int statusId = Integer.parseInt(idString);
 

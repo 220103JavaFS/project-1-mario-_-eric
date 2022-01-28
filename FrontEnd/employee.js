@@ -1,34 +1,32 @@
+const url = "http://localhost:7002/"
+
+if (sessionStorage.getItem("userSession") == null){
+  window.location.replace(url + "login.html");;
+}
+
 let submitBtn = document.getElementById("submitRequest");
 let reimbTable = document.getElementById("reimTable");
 let reimBtn = document.getElementById("getRequests");
-let loginBtn = document.getElementById("loginBtn");
-
-const userName = "flodev";
-const passWord = "password";
-const url = "http://localhost:7002/"
+let logoutBtn = document.getElementById("logoutBtn");
 
 submitBtn.addEventListener("click", sendRequest);
 reimBtn.addEventListener("click", getAllRequests);
-loginBtn.addEventListener("click", loginFunc);
+logoutBtn.addEventListener("click", logoutFunc);
 
 
-async function loginFunc(){
-    let user = {
-      username: userName,
-      password: passWord
-    }
+async function logoutFunc(){
+    
   
     let response = await fetch(
-      url+"login",
+      url+"logout",
       {
-        method : "POST",
-        body : JSON.stringify(user),
+        method : "POST",   
         credentials: "include"
       }
     );
   
     if(response.status===200){
-      loginBtn.innerText = ""; 
+      
     }else{
       console.log("Login unsuccessful. Returned status code of:"+response.status);
     }
@@ -42,7 +40,7 @@ async function sendRequest() {
       typeId_value = 2;
     } else if(document.querySelector('#select1').value == "Food") {
       typeId_value = 3;
-    } else if (document.querySelector('#select1').value == "Other") {
+    } else if (document.querySelector('#select1').value == "Otherg") {
       typeId_value = 4;
     }
 

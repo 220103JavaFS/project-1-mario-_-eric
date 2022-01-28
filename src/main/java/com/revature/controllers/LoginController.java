@@ -19,6 +19,7 @@ public class LoginController implements Controller{
     private static Logger log = LoggerFactory.getLogger(LoginController.class);
 
     private final Handler validateAccount = ctx -> {
+        System.out.println(ctx.body());
         // Check if session is not created
         if (ctx.req.getSession(false) == null){
             // Grabs information from request
