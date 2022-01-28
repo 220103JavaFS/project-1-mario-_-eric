@@ -13,7 +13,7 @@
 </div>
 <br>
     <div>
-        <table class="table table-dark" id="reimbursements">
+        <table class="table table-dark">
             <thead>
                 <th>ID</th>
                 <th>Amount</th>
@@ -24,40 +24,51 @@
                 <th>Resolver</th>
                 <th>Status</th>
                 <th>Type</th>
-                <th>Update/Submit</th>
             </thead>
             <tbody id="reimTabl">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="col-md-1">
-                        <div class="dropdown">
-                             <!-- td.innerText = reimbursement[data] -->
-                        </div>
-                    </td>
-                    <td></td>
-                    <td id="submit">
-                        <p> Select one from the given options:
-                            <select id="select1">
-                                <option value="pending">Pending</option>
-                                <option value="approved">Approved</option>
-                                <option value="denied">Denied</option>
-                            </select>
-                        </p>
-                        <div>
-                            <button class="btn btn-primary" id="updateStatusBtn" onclick="setStatus()"> Submit </button>
-                        </div>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
+    <br>
+    <br>
     <div>
+        <button class="btn btn-primary" id="loginBtn">Login</button> 
+        <button class="btn btn-primary" id="getRequests">Get Full Reimbursement List</button> 
+    </div> 
+    <br>
+    <br> 
+    <div>
+        <h3>Get Reimbursement Request List by Status</h3>
+        <form>
+            <label for="setStatusFilter">Choose a status filter:</label>
+            <select id="select2">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="denied">Denied</option>
+            </select>
+        </form>
+    </div>
+    <br>
+    <br>
+    <div>
+        <h3>Approve a request</h3>
+        <form>
+            <label for="reimId">Enter the request ID</label>
+            <input type="number" id="reimId" name="reimId">
+            <br>
+            <br>
+            <p> Select a status update:
+                <select id="select1">
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="denied">Denied</option>
+                </select>
+            </p>
+        </form>
+        <div>
+            <button class="btn btn-primary" id="submitRequest" onclick="setStatus()"> Submit </button>
+        </div>
         <p> The updated status is:
             <span class="output"></span>
         </p>

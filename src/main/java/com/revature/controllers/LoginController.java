@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.App;
 import com.revature.models.Encryption;
 import com.revature.models.User;
 import com.revature.models.UserDTO;
@@ -7,11 +8,15 @@ import com.revature.service.LoginService;
 import com.revature.service.UserService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LoginController implements Controller{
 
     private LoginService loginService = new LoginService();
     private UserService userService = new UserService();
+
+    private static Logger log = LoggerFactory.getLogger(LoginController.class);
 
     private final Handler validateAccount = ctx -> {
         // Check if session is not created
@@ -27,8 +32,10 @@ public class LoginController implements Controller{
                 ctx.req.getSession().setAttribute("user", dbUser);
                 ctx.json(dbUser);
                 ctx.status(200);
+                log.info("logged in!");
             } else {
                 ctx.status(400);
+                log.info("Unable to login");
             }
 
         } else {
