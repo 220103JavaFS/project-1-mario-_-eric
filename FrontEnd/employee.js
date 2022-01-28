@@ -11,6 +11,7 @@ submitBtn.addEventListener("click", sendRequest);
 reimBtn.addEventListener("click", getAllRequests);
 loginBtn.addEventListener("click", loginFunc);
 
+
 async function loginFunc(){
     let user = {
       username: userName,
@@ -52,13 +53,21 @@ async function sendRequest() {
     })
 
     if(response.status === 201){
+
+        document.querySelector('.response').textContent = "Success!"; // figure out if these work
+
         getAllRequests(); 
         console.log("Reimbursement request sent successfully!");
+        
     }else {
-        console.log("Request didn't go through!");
-    }
-}
 
+        document.querySelector('.response').textContent = "Failure :("; // figure out how to make these work
+
+        console.log("Request didn't go through!");
+        failure();
+    }
+    
+}
 // get request for reimbursement list
 async function getAllRequests(){
     
