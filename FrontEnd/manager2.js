@@ -23,7 +23,7 @@ async function loginFunc(){
       {
         method : "POST",
         body : JSON.stringify(user),
-        //credentials: "include"
+        credentials: "include"
       }
     );
   
@@ -66,7 +66,7 @@ async function getAllRequests(){
     
 
     let response = await fetch(url + "reimbursements", {
-      //credentials:"include"
+      credentials:"include"
 
     });
   
@@ -99,6 +99,6 @@ function populateRequests(requests){
 
       }
 
-      homeTable.appendChild(row);
+      reimTable.appendChild(row); // fix this!!!
     }
 }

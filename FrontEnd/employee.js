@@ -106,6 +106,6 @@ function populateRequests(requests){
 
       }
 
-      homeTable.appendChild(row);
+      reimbTable.appendChild(row); // fix this!!!!
     }
 }
