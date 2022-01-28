@@ -48,6 +48,7 @@ public class ReimbursementController implements Controller{
     private final Handler createTicket = ctx -> {
         User u = SessionUtil.UserValidate(ctx, UserRole.Employee);
         if (u != null){
+            System.out.println(ctx.body());
             ReimbursementDTO dto = ctx.bodyAsClass(ReimbursementDTO.class);
             Reimbursement reim = new Reimbursement();
             reim.setAmount(dto.amount);

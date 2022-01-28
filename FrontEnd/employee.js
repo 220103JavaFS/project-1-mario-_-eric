@@ -36,19 +36,28 @@ async function loginFunc(){
 
 async function sendRequest() {
    
+    let typeId_value = 1;
+
+    if (document.querySelector('#select1').value == "Travel"){
+      typeId_value = 2;
+    } else if(document.querySelector('#select1').value == "Food") {
+      typeId_value = 3;
+    } else if (document.querySelector('#select1').value == "Other") {
+      typeId_value = 4;
+    }
 
     // sending reimbursement request
+    console.log(document.querySelector('#select1').value);
     let status = {
         
-    amount:document.getElementById("amount").value,
-    description:document.getElementById("description").value,
-    typeId:document.querySelector('#select1').value
-
+      amount:document.getElementById("amount").value,
+      description:document.getElementById("description").value,
+      typeId:typeId_value
     } 
 
     let response = await fetch(url + "reimbursements", {
         method:"POST",
-        body:JSON.stringify(sendRequest),
+        body:JSON.stringify(status),
         credentials:"include"
     })
 
@@ -64,7 +73,7 @@ async function sendRequest() {
         document.querySelector('.response').textContent = "Failure :("; // figure out how to make these work
 
         console.log("Request didn't go through!");
-        failure();
+        //failure();
     }
     
 }
@@ -92,20 +101,44 @@ async function getAllRequests(){
 // create rows and fill them with data from reimbursement request
 function populateRequests(requests){
 
-    reimbTable.innerHTML ="";
+  reimTable.innerHTML ="";
 
-    for(let request of requests){
+  for(let request of requests){
 
-      let row = document.createElement("tr");
+    let row = document.createElement("tr");
 
-      for(let data in request){
-
+    for(let data in request){
+      // We're skipping the information we don't need to show
+      if(data != "authorId" && data != "resolverId" && data != "receipt" && data != "statusId" && data != "typeId"){            
+        // data = Key
+        // request[data] = Value
+        let request_data = request[data];
+        // We need to format the dates that come from our request
+        if (data == "dateSubmitted" || data == "dateResolved") {       
+          request_data = formatDate(request_data);
+        }
         let td = document.createElement("td");
-        td.innerText = request[data];
+        td.innerText = request_data;
         row.appendChild(td); 
-
       }
-
-      reimbTable.appendChild(row); // fix this!!!!
     }
+    reimTable.appendChild(row); 
+  }
+}
+
+function formatDate(dateData){
+  // Our Result
+  var result = "";
+  // Ensures data is not null
+  if (dateData != null) {
+    // Creates new Date from data
+    var d = new Date(dateData);
+    // Uses ternary operator
+    var ampm = (d.getHours() >= 12) ? "PM" : "AM";    
+    // Creates our formatting
+    result = ((d.getMonth() + 1) + "/"  + d.getDate() + "/" + d.getFullYear() +
+      " " + ((d.getHours() + 11) % 12 + 1) + ":" + d.getMinutes() + " " + ampm);
+  }
+  // Returns the result
+  return result;
 }

@@ -20,7 +20,7 @@ public class App {
        // app = Javalin.create(); // for running tests through postman
 
         app = Javalin.create((config)->{
-            config.addStaticFiles("C:\\Users\\flodev\\Desktop\\ProjectOne\\project-1-mario-_-eric\\FrontEnd",
+            config.addStaticFiles("C:\\Revature\\Project1\\project-1-mario-_-eric\\FrontEnd",
                     Location.EXTERNAL);
         });
 
