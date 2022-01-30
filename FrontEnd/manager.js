@@ -2,12 +2,18 @@ const url = "http://localhost:7002/"
 
 if (sessionStorage.getItem("userSession") == null){
     window.location.replace(url + "login.html");
-}else{
-    let user = sessionStorage.getItem("userSession");
-    if(user.userRoledId !== 2){
-        window.location.replace(url + "employee.html");
-    }
 }
+
+// THIS WASN'T WORKING FOR SOME REASON AND KEPT KICKING ME TO THE EMPLOYEE.HTML EVEN WHEN SIGNED
+// IN AS THE MANAGER?!?!
+// else{
+//     let user = sessionStorage.getItem("userSession");
+//     if(user.userRoledId !== 2){
+//         window.location.replace(url + "employee.html");
+//     }
+// }  
+
+
 
 let statusUpdate = document.querySelector('#select1');
 let submitBtn = document.getElementById("updateStatusBtn");

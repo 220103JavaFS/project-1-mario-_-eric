@@ -30,9 +30,10 @@ async function loginFunc(){
     
       if(response.status===200){
         let user_info = await response.json();
+        console.log("User Role ID: " + user_info.userRoleId);
         sessionStorage.setItem("userSession", user_info);
         if (user_info.userRoleId == 2) {
-            window.location.replace(url + "manager2.html");
+            window.location.replace(url + "manager.html");
         } else {
             window.location.replace(url + "employee.html");
         }

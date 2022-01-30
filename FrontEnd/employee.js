@@ -41,7 +41,7 @@ async function sendRequest() {
       typeId_value = 2;
     } else if(document.querySelector('#select1').value == "Food") {
       typeId_value = 3;
-    } else if (document.querySelector('#select1').value == "Otherg") {
+    } else if (document.querySelector('#select1').value == "Other") {
       typeId_value = 4;
     }
 
