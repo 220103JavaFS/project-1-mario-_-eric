@@ -169,7 +169,7 @@ function populateRequests(requests){
             request_data = "$" + request_data;
           }
           let td = document.createElement("td");
-          if (data == "status") {
+          if (data == "status" || data == "type") {
             let btn = styleStatus(request_data);            
             td.appendChild(btn);
           } else {
@@ -206,6 +206,21 @@ function styleStatus(statusData) {
     case "PENDING":
       btn.style.backgroundColor = "#f5d442";
       break;
+    case "OTHER":
+      btn.style.backgroundColor = "gray";
+      break;
+    case "TRAVEL":
+      btn.style.backgroundColor = "#99ccff";
+      break;
+    case "FOOD":
+      btn.style.backgroundColor = "#cc6699";
+      break;
+    case "LODGING":
+      btn.style.backgroundColor = "#669999";
+      break;
+    default:
+      btn.style.backgroundColor = "blue";
+      break;
   }
   return btn;
 }
@@ -220,8 +235,12 @@ function formatDate(dateData){
     // Uses ternary operator
     var ampm = (d.getHours() >= 12) ? "PM" : "AM";    
     // Creates our formatting
+    var m = d.getMinutes();
+    if (m < 10) {
+      m = "0" + m;
+    }
     result = ((d.getMonth() + 1) + "/"  + d.getDate() + "/" + d.getFullYear() +
-      " " + ((d.getHours() + 11) % 12 + 1) + ":" + d.getMinutes() + " " + ampm);
+      " " + ((d.getHours() + 11) % 12 + 1) + ":" + m + " " + ampm);
   }
   // Returns the result if data is null string will be empty
   return result;
