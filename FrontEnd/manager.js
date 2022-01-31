@@ -71,8 +71,8 @@ async function setStatus() {
     console.log(id_notify);
     console.log(status.reimId);
 
-    if (isNaN(status.reimId)){
-      console.log("plz");
+    if (isNaN(status.reimId) || status.reimId < 0){
+      console.log("plz enter valid id");
       id_notify.style.fontSize = "12px";
       id_notify.style.color = "red";
       id_notify.innerHTML = "Please enter a valid reimbursement Id";

@@ -2,12 +2,19 @@ const url = "http://localhost:7002/"
 
 if (sessionStorage.getItem("userSession") == null){
   window.location.replace(url + "login.html");
-}
+}else{
+  let user = JSON.parse(sessionStorage.getItem("userSession"));
+  if(user.userRoleId == 2){
+      window.location.replace(url + "manager.html");
+  }
+} 
 
 let submitBtn = document.getElementById("submitRequest");
 let reimbTable = document.getElementById("reimTable");
 let reimBtn = document.getElementById("getRequests");
 let logoutBtn = document.getElementById("logoutBtn");
+let description_verify = document.getElementById("description_verify");
+let amount_verify = document.getElementById("amount_verify");
 
 submitBtn.addEventListener("click", sendRequest);
 reimBtn.addEventListener("click", getAllRequests);
@@ -46,13 +53,48 @@ async function sendRequest() {
     }
 
     // sending reimbursement request
-    console.log(document.querySelector('#select1').value);
+    console.log("The selected reimbursement type: " + document.querySelector('#select1').value);
+
     let status = {
         
-      amount:document.getElementById("amount").value,
+      amount:parseFloat(document.getElementById("amount").value),
       description:document.getElementById("description").value,
       typeId:typeId_value
+
     } 
+
+    console.log(status.amount);
+    let num_amount = status.amount;
+    let fixed_amount = num_amount.toFixed(2);
+    console.log(fixed_amount);
+
+    if (status.amount == "" || status.amount < 0 || status.amount != fixed_amount){
+      console.log("plz enter a valid amount");
+      amount_verify.style.fontSize = "12px";
+      amount_verify.style.color = "red";
+      amount_verify.innerHTML = "Please enter a valid amount";
+      amount_verify.style.fontWeight = "bold";  
+      
+      return;
+    }
+
+    if (status.amount != ""){
+      amount_verify.innerHTML = "";
+    }
+
+    if (status.description == ""){
+      console.log("plz put a description");
+      description_verify.style.fontSize = "12px";
+      description_verify.style.color = "red";
+      description_verify.innerHTML = "Please enter a description for request";
+      description_verify.style.fontWeight = "bold";  
+      
+      return;
+    }
+
+    if (status.description != ""){
+      description_verify.innerHTML = "";
+    }
 
     let response = await fetch(url + "reimbursements", {
         method:"POST",
@@ -116,8 +158,17 @@ function populateRequests(requests){
         if (data == "dateSubmitted" || data == "dateResolved") {       
           request_data = formatDate(request_data);
         }
+        if (data == "amount"){
+          request_data = "$" + request_data;
+        }
         let td = document.createElement("td");
-        td.innerText = request_data;
+        if (data == "status") {
+          let btn = styleStatus(request_data);            
+          td.appendChild(btn);
+        } else {
+        
+        td.innerText = request_data; 
+        }
         row.appendChild(td); 
       }
     }
@@ -140,4 +191,30 @@ function formatDate(dateData){
   }
   // Returns the result
   return result;
+}
+
+function styleStatus(statusData) {
+  let btn = document.createElement("input");
+  btn.type = "button";
+  btn.className = "btn";
+  btn.value = statusData;
+  btn.style.borderRadius = "25px";
+  btn.style.height = "30px";
+  btn.style.width = "80px";
+  btn.style.fontSize = "10px";
+  btn.style.fontWeight = "bold";
+  btn.disabled = true;
+
+  switch(statusData){
+    case "APPROVED":
+      btn.style.backgroundColor = "#42f587";
+      break;
+    case "DENIED":
+      btn.style.backgroundColor = "#f54242";
+      break;
+    case "PENDING":
+      btn.style.backgroundColor = "#f5d442";
+      break;
+  }
+  return btn;
 }
