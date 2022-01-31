@@ -81,6 +81,10 @@ async function setStatus() {
       return;
     }
 
+    if(status.reimId != ""){
+      id_notify.innerHTML = "";
+    }
+
     let response = await fetch(url + "reimbursements", {
         method:"PUT",
         body:JSON.stringify(status),

@@ -63,16 +63,16 @@ async function sendRequest() {
 
     } 
 
-    console.log(status.amount);
+    // for parsing the input and only allowing two decimal places
     let num_amount = status.amount;
     let fixed_amount = num_amount.toFixed(2);
-    console.log(fixed_amount);
+    console.log("your parsed amount: " + fixed_amount);
 
     if (status.amount == "" || status.amount < 0 || status.amount != fixed_amount){
       console.log("plz enter a valid amount");
       amount_verify.style.fontSize = "12px";
       amount_verify.style.color = "red";
-      amount_verify.innerHTML = "Please enter a valid amount";
+      amount_verify.innerHTML = "Please enter a valid amount, only two decimal places";
       amount_verify.style.fontWeight = "bold";  
       
       return;
