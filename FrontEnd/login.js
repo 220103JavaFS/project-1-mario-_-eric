@@ -1,6 +1,8 @@
 let usernameBox = document.getElementById("username");
 let passwordBox = document.getElementById("password");
 let loginBtn = document.getElementById("loginBtn");
+let login_verify = document.getElementById("username_verify");
+let pasword_verify = document.getElementById("password_verify");
 
 const url = "http://localhost:7002/"
 
@@ -19,6 +21,29 @@ async function loginFunc(){
     let user = {
         username: usernameBox.value,
         password: passwordBox.value
+    }
+
+    
+
+    if (user.username == ""){
+      
+      login_verify.style.fontSize = "12px";
+      login_verify.style.color = "red";
+      login_verify.innerHTML = "Invalid Username";
+      login_verify.style.fontWeight = "bold";
+      let p = document.createElement("div");
+      let break_line = document.createElement("br");
+      document.createTextNode('\u00A0');
+      p.appendChild(break_line);
+      //login_verify.appendChild(break_line);
+
+    }
+
+    if (user.password == ""){
+      password_verify.style.fontSize = "12px";
+      password_verify.style.color = "red";
+      password_verify.innerHTML = "Invalid Password";
+      password_verify.style.fontWeight = "bold";      
     }
 
     console.log("User and Pass:" + user.username + " | " + user.password);

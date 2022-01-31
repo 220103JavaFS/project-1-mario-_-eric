@@ -148,13 +148,49 @@ function populateRequests(requests){
           if (data == "dateSubmitted" || data == "dateResolved") {       
             request_data = formatDate(request_data);
           }
+          if (data == "amount"){
+            request_data = "$" + request_data;
+          }
           let td = document.createElement("td");
-          td.innerText = request_data;
+          if (data == "status") {
+            let btn = styleStatus(request_data);            
+            td.appendChild(btn);
+          } else {
+          
+          td.innerText = request_data; 
+          }
+          
           row.appendChild(td); 
         }
       }
       reimTable.appendChild(row); 
     }
+}
+
+function styleStatus(statusData) {
+  let btn = document.createElement("input");
+  btn.type = "button";
+  btn.className = "btn";
+  btn.value = statusData;
+  btn.style.borderRadius = "25px";
+  btn.style.height = "30px";
+  btn.style.width = "80px";
+  btn.style.fontSize = "10px";
+  btn.style.fontWeight = "bold";
+  btn.disabled = true;
+
+  switch(statusData){
+    case "APPROVED":
+      btn.style.backgroundColor = "#42f587";
+      break;
+    case "DENIED":
+      btn.style.backgroundColor = "#f54242";
+      break;
+    case "PENDING":
+      btn.style.backgroundColor = "#f5d442";
+      break;
+  }
+  return btn;
 }
 
 function formatDate(dateData){
