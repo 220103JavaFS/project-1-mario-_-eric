@@ -18,6 +18,7 @@ let reimBtn = document.getElementById("getRequests");
 let loginBtn = document.getElementById("loginBtn");
 let filterUpdate = document.getElementById("#select2");
 let getListBtn = document.getElementById("getList");
+let id_notify = document.getElementById("id_verify");
 
 
 submitBtn.addEventListener("click", setStatus);
@@ -67,6 +68,18 @@ async function setStatus() {
         statusId: statusId_value
     } 
 
+    console.log(id_notify);
+    console.log(status.reimId);
+
+    if (isNaN(status.reimId)){
+      console.log("plz");
+      id_notify.style.fontSize = "12px";
+      id_notify.style.color = "red";
+      id_notify.innerHTML = "Please enter a valid reimbursement Id";
+      id_notify.style.fontWeight = "bold";  
+      
+      return;
+    }
 
     let response = await fetch(url + "reimbursements", {
         method:"PUT",
