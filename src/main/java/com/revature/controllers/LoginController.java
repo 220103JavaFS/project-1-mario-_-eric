@@ -1,11 +1,9 @@
 package com.revature.controllers;
 
-import com.revature.App;
 import com.revature.models.Encryption;
 import com.revature.models.User;
 import com.revature.models.UserDTO;
 import com.revature.service.LoginService;
-import com.revature.service.UserService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 import org.slf4j.Logger;
@@ -14,7 +12,6 @@ import org.slf4j.LoggerFactory;
 public class LoginController implements Controller{
 
     private LoginService loginService = new LoginService();
-    private UserService userService = new UserService();
 
     private static Logger log = LoggerFactory.getLogger(LoginController.class);
 
@@ -33,14 +30,15 @@ public class LoginController implements Controller{
                 ctx.req.getSession().setAttribute("user", dbUser);
                 ctx.json(dbUser);
                 ctx.status(200);
-                log.info("logged in!");
+                log.info("USER_LOGGED_IN : " + u.getUsername() +  "\n"+ ctx.path());
             } else {
                 ctx.status(400);
-                log.info("Unable to login");
+                log.info("ERROR_LOGGIN_IN : database user not found " + "\n"+ ctx.path());
             }
 
         } else {
             ctx.status(400);
+            log.info("ERROR_LOGGIN_IN : User already logged in " + "\n" + ctx.path());
         }
 
     };
@@ -50,8 +48,10 @@ public class LoginController implements Controller{
         if (ctx.req.getSession(false) != null) {
             ctx.req.getSession().invalidate();
             ctx.status(200);
+            log.info("USER_LOGGED_OUT " + "\n" + ctx.path());
         } else {
             ctx.status(400);
+            log.info("ERROR_LOGGIN_OUT " + "\n" + ctx.path());
         }
     };
 

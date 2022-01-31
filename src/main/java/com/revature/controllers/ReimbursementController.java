@@ -9,11 +9,15 @@ import com.revature.utils.SessionUtil;
 import io.javalin.Javalin;
 
 import io.javalin.http.Handler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 public class ReimbursementController implements Controller{
+
+    private static Logger log = LoggerFactory.getLogger(ReimbursementController.class);
 
     private ReimbursementService reimbursementService = new ReimbursementService();
 
@@ -25,10 +29,12 @@ public class ReimbursementController implements Controller{
 
                 ctx.json(rem_list);
                 ctx.status(200);
+                log.info("VIEWING_ALL_REIMBURSEMENTS : " + u.getUsername() + "\n" + ctx.path());
             }else{
                 List<Reimbursement> emp_list = reimbursementService.getByUserId(u.getId());
                 ctx.json(emp_list);
                 ctx.status(200);
+                log.info("VIEWING_REIMBURSEMENTS : " + u.getUsername() + "\n" + ctx.path());
             }
         }
     };
@@ -43,6 +49,7 @@ public class ReimbursementController implements Controller{
             List<Reimbursement> rem_list = reimbursementService.getReimbursementsByStatusId(statusId);
             ctx.json(rem_list);
             ctx.status(200);
+            log.info("VIEWING_REIMBURSEMENTS_STATUS : " + u.getUsername() + "\n" + ctx.path());
         }
     };
 
@@ -61,8 +68,10 @@ public class ReimbursementController implements Controller{
 
             if(reimbursementService.saveReimbursement(reim)){
                 ctx.status(201);
+                log.info("CREATED_REIMBURSEMENT : " + u.getUsername() + "\n" + reim +  "\n" + ctx.path());
             }else{
                 ctx.status(400);
+                log.info("ERROR_CREATING_REIMBURSEMENT : " + u.getUsername() + "\n" + reim +  "\n" + ctx.path());
             }
         }
     };
@@ -84,8 +93,10 @@ public class ReimbursementController implements Controller{
                 if (reimbursementService.updateReimbursement(reim)) {
                     ctx.status(200);
                     ctx.json(reim);
+                    log.info("UPDATED_REIMBURSEMENT : " + u.getUsername() + "\n" + reim +  "\n" + ctx.path());
                 } else {
                     ctx.status(400);
+                    log.info("ERROR_UPDATING_REIMBURSEMENT : " + u.getUsername() + "\n" + reim +  "\n" + ctx.path());
                 }
             }
 
