@@ -1,5 +1,6 @@
 const url = "http://localhost:7002/"
 
+// rerouting depending on who and if someone is logged in
 if (sessionStorage.getItem("userSession") == null){
   window.location.replace(url + "login.html");
 }else{
@@ -16,10 +17,10 @@ let logoutBtn = document.getElementById("logoutBtn");
 let description_verify = document.getElementById("description_verify");
 let amount_verify = document.getElementById("amount_verify");
 
+
 submitBtn.addEventListener("click", sendRequest);
 reimBtn.addEventListener("click", getAllRequests);
 logoutBtn.addEventListener("click", logoutFunc);
-
 
 async function logoutFunc(){
     
@@ -55,11 +56,33 @@ async function sendRequest() {
     // sending reimbursement request
     console.log("The selected reimbursement type: " + document.querySelector('#select1').value);
 
+
+    // image uploading ********************************************************************
+    // const image = document.getElementById('file_upload');
+    // const fd = new FormData();
+    // image.addEventListener("change", () => {
+    //   uploadFile(image.files[0]);
+    // });
+    // // image uploading
+    // const uploadFile = (file) => {
+
+    // // add file to FormData object
+    
+    //   fd.append('file_upload', file);
+
+    // }
+    // image uploading **********************************************************************
+    
+
+
+    // the request body
     let status = {
         
       amount:parseFloat(document.getElementById("amount").value),
       description:document.getElementById("description").value,
-      typeId:typeId_value
+      typeId:typeId_value,
+      // from the form data above **********************************************************
+      //receipt:fd
 
     } 
 
@@ -68,6 +91,7 @@ async function sendRequest() {
     let fixed_amount = num_amount.toFixed(2);
     console.log("your parsed amount: " + fixed_amount);
 
+    // making sure employee enters valid amount
     if (status.amount == "" || status.amount < 0 || status.amount != fixed_amount){
       console.log("plz enter a valid amount");
       amount_verify.style.fontSize = "12px";
@@ -82,6 +106,7 @@ async function sendRequest() {
       amount_verify.innerHTML = "";
     }
 
+    // making sure they enter a description
     if (status.description == ""){
       console.log("plz put a description");
       description_verify.style.fontSize = "12px";
@@ -118,6 +143,7 @@ async function sendRequest() {
     }
     
 }
+
 // get request for reimbursement list
 async function getAllRequests(){
     
@@ -176,6 +202,7 @@ function populateRequests(requests){
   }
 }
 
+// formatting the date
 function formatDate(dateData){
   // Our Result
   var result = "";
@@ -197,6 +224,7 @@ function formatDate(dateData){
   return result;
 }
 
+// style buttons(sort of lol) for status & type
 function styleStatus(statusData) {
   let btn = document.createElement("input");
   btn.type = "button";
@@ -237,3 +265,4 @@ function styleStatus(statusData) {
   }
   return btn;
 }
+
