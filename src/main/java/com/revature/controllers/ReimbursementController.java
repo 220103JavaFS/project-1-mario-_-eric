@@ -62,6 +62,9 @@ public class ReimbursementController implements Controller{
             reim.setAmount(dto.amount);
             reim.setDescription(dto.description);
             reim.setTypeId(dto.typeId);
+
+            reim.setReceipt(dto.receipt);
+
             reim.setDateSubmitted(new Timestamp(System.currentTimeMillis()));
             reim.setAuthorId(u.getId());
             reim.setStatusId(1);

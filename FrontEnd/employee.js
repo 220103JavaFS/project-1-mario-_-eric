@@ -58,22 +58,27 @@ async function sendRequest() {
 
 
     // image uploading ********************************************************************
-    // const image = document.getElementById('file_upload');
-    // const fd = new FormData();
-    // image.addEventListener("change", () => {
-    //   uploadFile(image.files[0]);
-    // });
-    // // image uploading
-    // const uploadFile = (file) => {
-
-    // // add file to FormData object
+    let image = document.getElementById('file-upload');
+    let reader = new FileReader();
+    let image_array = [];
     
-    //   fd.append('file_upload', file);
+    // image uploading
+ 
+    if (image.files && image.files[0]) {
+      reader.onload = function(e) {
+        image_array = e.target.result;
+        //console.log(e.target.result);
 
-    // }
+      }
+  
+      reader.readAsDataURL(image.files[0]);
+    }  
+
+    console.log(image_array);
+    
     // image uploading **********************************************************************
     
-
+    
 
     // the request body
     let status = {
@@ -82,7 +87,7 @@ async function sendRequest() {
       description:document.getElementById("description").value,
       typeId:typeId_value,
       // from the form data above **********************************************************
-      //receipt:fd
+      receipt:image_array
 
     } 
 

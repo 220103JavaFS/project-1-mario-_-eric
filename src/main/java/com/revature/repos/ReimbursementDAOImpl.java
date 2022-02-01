@@ -181,14 +181,15 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
         try(Connection conn = ConnectionUtil.getConnection()){
             String sql = "INSERT INTO ers_reimbursement (reimb_amount, reimb_submitted," +
-                    "reimb_description, reimb_author, reimb_status_id, reimb_type_id) " +
-                    "VALUES (?, ?, ?, ?, ?, ?);";
+                    "reimb_description, reimb_receipt, reimb_author, reimb_status_id, reimb_type_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
             PreparedStatement statement = conn.prepareStatement(sql);
             int count = 0;
             statement.setDouble(++count, r.getAmount());
             statement.setTimestamp(++count, r.getDateSubmitted());
             statement.setString(++count, r.getDescription());
+            statement.setBytes(++count, r.getReceipt());
             statement.setInt(++count, r.getAuthorId());
             statement.setInt(++count, r.getStatusId());
             statement.setInt(++count, r.getTypeId());
@@ -276,6 +277,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
                 reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
                 reimb.setDescription(result.getString("reimb_description"));
+                reimb.setReceipt(result.getBytes("reimb_receipt"));
                 reimb.setAuthorId(result.getInt("reimb_author"));
                 reimb.setResolverId(result.getInt("reimb_resolver"));
                 reimb.setStatusId(result.getInt("reimb_status_id"));
@@ -324,6 +326,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
                 reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
                 reimb.setDescription(result.getString("reimb_description"));
+                reimb.setReceipt(result.getBytes("reimb_receipt"));
                 reimb.setAuthorId(result.getInt("reimb_author"));
                 reimb.setResolverId(result.getInt("reimb_resolver"));
                 reimb.setStatusId(result.getInt("reimb_status_id"));

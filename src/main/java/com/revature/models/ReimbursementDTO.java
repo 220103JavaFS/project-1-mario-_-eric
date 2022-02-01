@@ -6,6 +6,8 @@ public class ReimbursementDTO {
     public String description;
     public int typeId;
 
+    public byte[] receipt;
+
 
     public int reimId;
     public int statusId;
