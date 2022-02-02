@@ -50,7 +50,8 @@ async function sendRequest() {
     // image uploading ********************************************************************
     let image = document.getElementById('file-upload');
     let reader = new FileReader();
-    
+    image.classList.add("myImg");
+    reader.classList.add("myImg");
     // image uploading
     if (image.files && image.files[0]) {
       reader.onload = function(e) {
@@ -64,6 +65,31 @@ async function sendRequest() {
     
     // image uploading **********************************************************************  
 }
+
+// image pop-up on click *********************************************************
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = img;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// image pop-up on click *********************************************************
 
 async function test(fileResult){
   console.log("Test Result: " + fileResult)
@@ -192,9 +218,16 @@ function populateRequests(requests){
         if (data == "receipt" && request_data != null) {
           console.log(request_data);
           let img = new Image();
+          
           img.src = request_data;
-          img.height = 150;
-          img.width = 150;
+
+
+          img.height = 111;
+          img.width = 111;
+
+          img.classList.add("myImg");
+          img.id = "myImg";
+
           td.appendChild(img);
           console.log("RECEIPT = " + request_data);
         }
