@@ -18,7 +18,7 @@ table tr:last-child td:last-child {
     border-bottom-right-radius: 6px;
 }
 
-/* Style the Image Used to Trigger the Modal */
+/* Image opacity change on hover */
 #myImg {
   border-radius: 5px;
   cursor: pointer;
