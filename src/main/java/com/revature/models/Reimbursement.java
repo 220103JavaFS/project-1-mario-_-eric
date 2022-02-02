@@ -37,7 +37,7 @@ public class Reimbursement {
 
 
     public Reimbursement(double amount, Timestamp dateSubmitted, Timestamp dateResolved,
-                         String description, int authorId, int resolverId, int statusId, int typeId) {
+                         String description, String receipt, int authorId, int resolverId, int statusId, int typeId) {
         this.id = id;
         this.amount = amount;
         this.dateSubmitted = dateSubmitted;
@@ -47,6 +47,7 @@ public class Reimbursement {
         this.resolverId = resolverId;
         this.statusId = statusId;
         this.typeId = typeId;
+        this.receipt = receipt;
 
         this.status = reimbursementStatusValues[statusId];
         this.type = reimbursementTypeValues[typeId];

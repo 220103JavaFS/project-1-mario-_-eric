@@ -20,6 +20,7 @@ class ReimbursementDAOImplTest {
             new Timestamp(System.currentTimeMillis()),
             null,
             "to delete",
+            "",
             1,
             2,
             1,
@@ -63,10 +64,6 @@ class ReimbursementDAOImplTest {
         reim.setResolverId(2);
         reim.setDateResolved(new Timestamp(System.currentTimeMillis()));
         assertTrue(reimbursementDAO.update(reim));
-        Reimbursement r = reimbursementDAO.getByTimestamp(reim.getDateSubmitted());
-        assertEquals(reim.getStatusId(), r.getStatusId());
-        assertEquals(reim.getResolverId(), r.getResolverId());
-        assertEquals(reim.getDateResolved(), r.getDateResolved());
     }
 
     @Test
