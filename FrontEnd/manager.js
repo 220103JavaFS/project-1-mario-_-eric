@@ -169,6 +169,8 @@ function populateRequests(requests){
           if (data == "receipt" && request_data != null) {
             let img = new Image();
             img.src = request_data;
+            img.height = 150;
+            img.width = 150;
             td.appendChild(img);
             console.log("RECEIPT = " + request_data);
           }

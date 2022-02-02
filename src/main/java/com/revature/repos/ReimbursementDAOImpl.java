@@ -47,7 +47,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
                 User userAuthor = userDAO.get(reimb.getAuthorId());
 
-                System.out.println(reimb.getResolverId());
+                byte[] receipt = result.getBytes("reimb_receipt");
+                if (receipt != null && receipt.length > 0) {
+                    reimb.setReceipt(new String(receipt, StandardCharsets.UTF_8));
+                }
 
                 if(reimb.getResolverId() != 0) {
                     User userResolver = userDAO.get(reimb.getResolverId());
@@ -98,7 +101,10 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
                 User userAuthor = userDAO.get(reimb.getAuthorId());
 
-                System.out.println(reimb.getResolverId());
+                byte[] receipt = result.getBytes("reimb_receipt");
+                if (receipt != null && receipt.length > 0) {
+                    reimb.setReceipt(new String(receipt, StandardCharsets.UTF_8));
+                }
 
                 if(reimb.getResolverId() != 0) {
                     User userResolver = userDAO.get(reimb.getResolverId());

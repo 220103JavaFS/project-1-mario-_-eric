@@ -175,8 +175,10 @@ function populateRequests(requests){
   for(let request of requests){
 
     let row = document.createElement("tr");
-
+    console.log(request)
     for(let data in request){
+      
+      //console.log(data)
       // We're skipping the information we don't need to show
       if(data != "authorId" && data != "resolverId" && data != "statusId" && data != "typeId"){            
         // data = Key
@@ -187,6 +189,15 @@ function populateRequests(requests){
         if (data == "dateSubmitted" || data == "dateResolved") {       
           request_data = formatDate(request_data);
         }
+        if (data == "receipt" && request_data != null) {
+          console.log(request_data);
+          let img = new Image();
+          img.src = request_data;
+          img.height = 150;
+          img.width = 150;
+          td.appendChild(img);
+          console.log("RECEIPT = " + request_data);
+        }
         if (data == "amount"){
           request_data = "$" + request_data;
         }
@@ -194,8 +205,10 @@ function populateRequests(requests){
           let btn = styleStatus(request_data);            
           td.appendChild(btn);
         } else {
-        
-        td.innerText = request_data; 
+
+          if (data != "receipt") {
+            td.innerText = request_data; 
+          }
         }
         row.appendChild(td); 
       }
