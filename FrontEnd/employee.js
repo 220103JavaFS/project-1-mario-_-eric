@@ -50,8 +50,7 @@ async function sendRequest() {
     // image uploading ********************************************************************
     let image = document.getElementById('file-upload');
     let reader = new FileReader();
-    image.classList.add("myImg");
-    reader.classList.add("myImg");
+    
     // image uploading
     if (image.files && image.files[0]) {
       reader.onload = function(e) {
@@ -77,7 +76,7 @@ var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 img.onclick = function(){
   modal.style.display = "block";
-  modalImg.src = img;
+  modalImg.src = this.src;
   captionText.innerHTML = this.alt;
 }
 
