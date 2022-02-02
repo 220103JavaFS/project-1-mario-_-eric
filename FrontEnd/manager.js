@@ -169,8 +169,14 @@ function populateRequests(requests){
           if (data == "receipt" && request_data != null) {
             let img = new Image();
             img.src = request_data;
-            img.height = 150;
-            img.width = 150;
+
+
+            img.height = 111;
+            img.width = 111;
+
+            img.classList.add("myImg");
+            img.id = "myImg";
+            
             td.appendChild(img);
             console.log("RECEIPT = " + request_data);
           }

@@ -67,12 +67,17 @@ async function sendRequest() {
 
 // image pop-up on click *********************************************************
 
+// let images = document.getElementById("myImg");
 
+
+// async function image() {
+//   images.style.display = "block";
+// }
 
 // image pop-up on click *********************************************************
 
 async function test(fileResult){
-  console.log("Test Result: " + fileResult)
+  //console.log("Test Result: " + fileResult)
 
   let typeId_value = 1;
 
@@ -181,7 +186,7 @@ function populateRequests(requests){
   for(let request of requests){
 
     let row = document.createElement("tr");
-    console.log(request)
+    //console.log(request)
     for(let data in request){
       
       //console.log(data)
@@ -196,20 +201,21 @@ function populateRequests(requests){
           request_data = formatDate(request_data);
         }
         if (data == "receipt" && request_data != null) {
-          console.log(request_data);
+         
           let img = new Image();
           
           img.src = request_data;
-
 
           img.height = 111;
           img.width = 111;
 
           img.classList.add("myImg");
           img.id = "myImg";
+          
+          img.setAttribute("onclick", "alert('plz no click me')");
 
           td.appendChild(img);
-          console.log("RECEIPT = " + request_data);
+          //console.log("RECEIPT = " + request_data);
         }
         if (data == "amount"){
           request_data = "$" + request_data;
