@@ -157,24 +157,31 @@ function populateRequests(requests){
 
       for(let data in request){
         // We're skipping the information we don't need to show
-        if(data != "authorId" && data != "resolverId" && data != "receipt" && data != "statusId" && data != "typeId"){            
+        if(data != "authorId" && data != "resolverId" && data != "statusId" && data != "typeId"){            
           // data = Key
           // request[data] = Value
           let request_data = request[data];
           // We need to format the dates that come from our request
+          let td = document.createElement("td");
           if (data == "dateSubmitted" || data == "dateResolved") {       
             request_data = formatDate(request_data);
+          }
+          if (data == "receipt" && request_data != null) {
+            let img = new Image();
+            img.src = request_data;
+            td.appendChild(img);
+            console.log("RECEIPT = " + request_data);
           }
           if (data == "amount"){
             request_data = "$" + request_data;
           }
-          let td = document.createElement("td");
           if (data == "status" || data == "type") {
             let btn = styleStatus(request_data);            
             td.appendChild(btn);
           } else {
-          
-          td.innerText = request_data; 
+            if (data != "receipt") {
+              td.innerText = request_data; 
+            }
           }
           
           row.appendChild(td); 

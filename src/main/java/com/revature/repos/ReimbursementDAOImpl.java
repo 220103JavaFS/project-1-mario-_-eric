@@ -6,6 +6,7 @@ import com.revature.utils.ConnectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -189,7 +190,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
             statement.setDouble(++count, r.getAmount());
             statement.setTimestamp(++count, r.getDateSubmitted());
             statement.setString(++count, r.getDescription());
-            statement.setBytes(++count, r.getReceipt());
+            statement.setBytes(++count, r.getReceipt().getBytes(StandardCharsets.UTF_8));
             statement.setInt(++count, r.getAuthorId());
             statement.setInt(++count, r.getStatusId());
             statement.setInt(++count, r.getTypeId());
@@ -220,7 +221,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
             statement.setTimestamp(++count, r.getDateSubmitted());
             statement.setTimestamp(++count, r.getDateResolved());
             statement.setString(++count, r.getDescription());
-            statement.setBytes(++count, r.getReceipt());
+            statement.setBytes(++count, r.getReceipt().getBytes(StandardCharsets.UTF_8));
             statement.setInt(++count, r.getAuthorId());
             statement.setInt(++count, r.getResolverId());
             statement.setInt(++count, r.getStatusId());
@@ -277,7 +278,6 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
                 reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
                 reimb.setDescription(result.getString("reimb_description"));
-                reimb.setReceipt(result.getBytes("reimb_receipt"));
                 reimb.setAuthorId(result.getInt("reimb_author"));
                 reimb.setResolverId(result.getInt("reimb_resolver"));
                 reimb.setStatusId(result.getInt("reimb_status_id"));
@@ -285,6 +285,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
                 String authorName = "";
                 String resolverName = "";
+
+                byte[] receipt = result.getBytes("reimb_receipt");
+                if (receipt != null && receipt.length > 0) {
+                    reimb.setReceipt(new String(receipt, StandardCharsets.UTF_8));
+                }
 
                 User userAuthor = userDAO.get(reimb.getAuthorId());
 
@@ -326,11 +331,16 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
                 reimb.setDateSubmitted(result.getTimestamp("reimb_submitted"));
                 reimb.setDateResolved(result.getTimestamp("reimb_resolved"));
                 reimb.setDescription(result.getString("reimb_description"));
-                reimb.setReceipt(result.getBytes("reimb_receipt"));
+
                 reimb.setAuthorId(result.getInt("reimb_author"));
                 reimb.setResolverId(result.getInt("reimb_resolver"));
                 reimb.setStatusId(result.getInt("reimb_status_id"));
                 reimb.setTypeId(result.getInt("reimb_type_id"));
+
+                byte[] receipt = result.getBytes("reimb_receipt");
+                if (receipt != null && receipt.length > 0) {
+                    reimb.setReceipt(new String(receipt, StandardCharsets.UTF_8));
+                }
 
                 String authorName = "";
                 String resolverName = "";

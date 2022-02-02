@@ -41,9 +41,34 @@ async function logoutFunc(){
     }
 }
 
-async function sendRequest() {
-   
-    let typeId_value = 1;
+async function sendRequest() {   
+
+    // sending reimbursement request
+    console.log("The selected reimbursement type: " + document.querySelector('#select1').value);
+
+
+    // image uploading ********************************************************************
+    let image = document.getElementById('file-upload');
+    let reader = new FileReader();
+    
+    // image uploading
+    if (image.files && image.files[0]) {
+      reader.onload = function(e) {
+        test(e.target.result);
+      }
+  
+      reader.readAsDataURL(image.files[0]);
+    } else {
+      test([]);
+    }
+    
+    // image uploading **********************************************************************  
+}
+
+async function test(fileResult){
+  console.log("Test Result: " + fileResult)
+
+  let typeId_value = 1;
 
     if (document.querySelector('#select1').value == "Travel"){
       typeId_value = 2;
@@ -53,100 +78,72 @@ async function sendRequest() {
       typeId_value = 4;
     }
 
-    // sending reimbursement request
-    console.log("The selected reimbursement type: " + document.querySelector('#select1').value);
-
-
-    // image uploading ********************************************************************
-    let image = document.getElementById('file-upload');
-    let reader = new FileReader();
-    let image_array = [];
-    
-    // image uploading
- 
-    if (image.files && image.files[0]) {
-      reader.onload = function(e) {
-        image_array = e.target.result;
-        //console.log(e.target.result);
-
-      }
-  
-      reader.readAsDataURL(image.files[0]);
-    }  
-
-    console.log(image_array);
-    
-    // image uploading **********************************************************************
-    
-    
-
-    // the request body
-    let status = {
+  // the request body
+  let status = {
         
-      amount:parseFloat(document.getElementById("amount").value),
-      description:document.getElementById("description").value,
-      typeId:typeId_value,
-      // from the form data above **********************************************************
-      receipt:image_array
+    amount:parseFloat(document.getElementById("amount").value),
+    description:document.getElementById("description").value,
+    typeId:typeId_value,
+    // from the form data above **********************************************************
+    receipt:fileResult
 
-    } 
+  } 
 
-    // for parsing the input and only allowing two decimal places
-    let num_amount = status.amount;
-    let fixed_amount = num_amount.toFixed(2);
-    console.log("your parsed amount: " + fixed_amount);
+  // for parsing the input and only allowing two decimal places
+  let num_amount = status.amount;
+  let fixed_amount = num_amount.toFixed(2);
+  console.log("your parsed amount: " + fixed_amount);
 
-    // making sure employee enters valid amount
-    if (status.amount == "" || status.amount < 0 || status.amount != fixed_amount){
-      console.log("plz enter a valid amount");
-      amount_verify.style.fontSize = "12px";
-      amount_verify.style.color = "red";
-      amount_verify.innerHTML = "Please enter a valid amount, only two decimal places";
-      amount_verify.style.fontWeight = "bold";  
-      
-      return;
-    }
-
-    if (status.amount != ""){
-      amount_verify.innerHTML = "";
-    }
-
-    // making sure they enter a description
-    if (status.description == ""){
-      console.log("plz put a description");
-      description_verify.style.fontSize = "12px";
-      description_verify.style.color = "red";
-      description_verify.innerHTML = "Please enter a description for request";
-      description_verify.style.fontWeight = "bold";  
-      
-      return;
-    }
-
-    if (status.description != ""){
-      description_verify.innerHTML = "";
-    }
-
-    let response = await fetch(url + "reimbursements", {
-        method:"POST",
-        body:JSON.stringify(status),
-        credentials:"include"
-    })
-
-    if(response.status === 201){
-
-        document.querySelector('.response').textContent = "Success!"; // figure out if these work
-
-        getAllRequests(); 
-        console.log("Reimbursement request sent successfully!");
-        
-    }else {
-
-        document.querySelector('.response').textContent = "Failure :("; // figure out how to make these work
-
-        console.log("Request didn't go through!");
-        //failure();
-    }
+  // making sure employee enters valid amount
+  if (status.amount == "" || status.amount < 0 || status.amount != fixed_amount){
+    console.log("plz enter a valid amount");
+    amount_verify.style.fontSize = "12px";
+    amount_verify.style.color = "red";
+    amount_verify.innerHTML = "Please enter a valid amount, only two decimal places";
+    amount_verify.style.fontWeight = "bold";  
     
+    return;
+  }
+
+  if (status.amount != ""){
+    amount_verify.innerHTML = "";
+  }
+
+  // making sure they enter a description
+  if (status.description == ""){
+    console.log("plz put a description");
+    description_verify.style.fontSize = "12px";
+    description_verify.style.color = "red";
+    description_verify.innerHTML = "Please enter a description for request";
+    description_verify.style.fontWeight = "bold";  
+    
+    return;
+  }
+
+  if (status.description != ""){
+    description_verify.innerHTML = "";
+  }
+
+  let response = await fetch(url + "reimbursements", {
+      method:"POST",
+      body:JSON.stringify(status),
+      credentials:"include"
+  })
+
+  if(response.status === 201){
+
+      document.querySelector('.response').textContent = "Success!"; // figure out if these work
+
+      getAllRequests(); 
+      console.log("Reimbursement request sent successfully!");
+      
+  }else {
+
+      document.querySelector('.response').textContent = "Failure :("; // figure out how to make these work
+
+      console.log("Request didn't go through!");
+      //failure();
+  }
 }
 
 // get request for reimbursement list
@@ -181,18 +178,18 @@ function populateRequests(requests){
 
     for(let data in request){
       // We're skipping the information we don't need to show
-      if(data != "authorId" && data != "resolverId" && data != "receipt" && data != "statusId" && data != "typeId"){            
+      if(data != "authorId" && data != "resolverId" && data != "statusId" && data != "typeId"){            
         // data = Key
         // request[data] = Value
         let request_data = request[data];
         // We need to format the dates that come from our request
+        let td = document.createElement("td");
         if (data == "dateSubmitted" || data == "dateResolved") {       
           request_data = formatDate(request_data);
         }
         if (data == "amount"){
           request_data = "$" + request_data;
         }
-        let td = document.createElement("td");
         if (data == "status" || data == "type") {
           let btn = styleStatus(request_data);            
           td.appendChild(btn);

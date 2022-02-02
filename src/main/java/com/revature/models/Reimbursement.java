@@ -22,7 +22,7 @@ public class Reimbursement {
     private Timestamp dateSubmitted;
     private Timestamp dateResolved;
     private String description;
-    private byte[] receipt;
+    private String receipt;
     private int authorId;
     private int resolverId;
     private String fullNameAuthor;
@@ -108,11 +108,11 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public byte[] getReceipt() {
+    public String getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(byte[] receipt) {
+    public void setReceipt(String receipt) {
         this.receipt = receipt;
     }
 
@@ -163,13 +163,13 @@ public class Reimbursement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reimbursement that = (Reimbursement) o;
-        return id == that.id && Double.compare(that.amount, amount) == 0 && authorId == that.authorId && resolverId == that.resolverId && statusId == that.statusId && typeId == that.typeId && Objects.equals(dateSubmitted, that.dateSubmitted) && Objects.equals(dateResolved, that.dateResolved) && Objects.equals(description, that.description) && Arrays.equals(receipt, that.receipt);
+        return id == that.id && Double.compare(that.amount, amount) == 0 && authorId == that.authorId && resolverId == that.resolverId && statusId == that.statusId && typeId == that.typeId && Objects.equals(dateSubmitted, that.dateSubmitted) && Objects.equals(dateResolved, that.dateResolved) && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(id, amount, dateSubmitted, dateResolved, description, authorId, resolverId, statusId, typeId);
-        result = 31 * result + Arrays.hashCode(receipt);
+        result = 31 * result;
         return result;
     }
 
@@ -181,7 +181,7 @@ public class Reimbursement {
                 ", dateSubmitted='" + dateSubmitted + '\'' +
                 ", dateResolved='" + dateResolved + '\'' +
                 ", description='" + description + '\'' +
-                ", receipt=" + Arrays.toString(receipt) +
+                ", receipt=" + receipt +
                 ", authorId=" + authorId +
                 ", resolverId=" + resolverId +
                 ", statusId=" + statusId +
