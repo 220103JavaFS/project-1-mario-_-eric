@@ -1,4 +1,5 @@
-const url = "http://54.176.76.0:7000/"
+const url = "http://54.176.76.0:7000/" // ec2 URL
+//const url = "http://localhost:7000/" // local URL
 
 // rerouting depending on who and if someone is logged in
 if (sessionStorage.getItem("userSession") == null){
@@ -16,12 +17,18 @@ let reimBtn = document.getElementById("getRequests");
 let logoutBtn = document.getElementById("logoutBtn");
 let description_verify = document.getElementById("description_verify");
 let amount_verify = document.getElementById("amount_verify");
+let login_name = document.getElementById("loginName");
 
 
 submitBtn.addEventListener("click", sendRequest);
 reimBtn.addEventListener("click", getAllRequests);
 logoutBtn.addEventListener("click", logoutFunc);
 
+// display name of who's logged in
+let user = JSON.parse(sessionStorage.getItem("userSession"));
+login_name.innerHTML = user.firstName + " " + user.lastName;
+
+// logout function
 async function logoutFunc(){
     
   
@@ -41,7 +48,10 @@ async function logoutFunc(){
     }
 }
 
-async function sendRequest() {   
+async function sendRequest() {  
+  
+  // changle button color back
+  reimBtn.style.backgroundColor = "#0275d8";
 
     // sending reimbursement request
     console.log("The selected reimbursement type: " + document.querySelector('#select1').value);
@@ -54,30 +64,20 @@ async function sendRequest() {
     // image uploading
     if (image.files && image.files[0]) {
       reader.onload = function(e) {
-        test(e.target.result);
+        requestFunc(e.target.result);
       }
   
       reader.readAsDataURL(image.files[0]);
     } else {
-      test([]);
+      requestFunc(' ');
     }
     
     // image uploading **********************************************************************  
 }
 
-// image pop-up on click *********************************************************
 
-// let images = document.getElementById("myImg");
-
-
-// async function image() {
-//   images.style.display = "block";
-// }
-
-// image pop-up on click *********************************************************
-
-async function test(fileResult){
-  //console.log("Test Result: " + fileResult)
+async function requestFunc(fileResult){
+  
 
   let typeId_value = 1;
 
@@ -143,7 +143,7 @@ async function test(fileResult){
 
   if(response.status === 201){
 
-      document.querySelector('.response').textContent = "Success!"; // figure out if these work
+      document.querySelector('.response').textContent = "Your Request was sent successfully!"; // figure out if these work
 
       getAllRequests(); 
       console.log("Reimbursement request sent successfully!");
@@ -153,12 +153,15 @@ async function test(fileResult){
       document.querySelector('.response').textContent = "Failure :("; // figure out how to make these work
 
       console.log("Request didn't go through!");
-      //failure();
+      
   }
 }
 
 // get request for reimbursement list
 async function getAllRequests(){
+
+  // changle button color back
+  submitBtn.style.backgroundColor = "#0275d8";
     
 
     let response = await fetch(url + "reimbursements", {
@@ -200,11 +203,13 @@ function populateRequests(requests){
         if (data == "dateSubmitted" || data == "dateResolved") {       
           request_data = formatDate(request_data);
         }
-        if (data == "receipt" && request_data != null) {
+        if (data == "receipt" && request_data != null && request_data != ' ') {
          
           let img = new Image();
           
+          
           img.src = request_data;
+          
 
           img.height = 111;
           img.width = 111;
@@ -216,6 +221,7 @@ function populateRequests(requests){
 
           td.appendChild(img);
           //console.log("RECEIPT = " + request_data);
+          
         }
         if (data == "amount"){
           request_data = "$" + request_data;

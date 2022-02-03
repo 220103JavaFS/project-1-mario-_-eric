@@ -30,3 +30,12 @@ table tr:last-child td:last-child {
   transform: scale(6);
 }
 
+div{
+  text-align: center;
+}
+
+.form-group{
+  border-color: black;
+  border-width: 2px;
+}
+

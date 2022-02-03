@@ -8,11 +8,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 <body class="container-fluid">
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">ERS</a>
             </div>
+            <!-- login name display -->
+            <span>Welcome back  
+                <span id="loginName" name="loginName"></span>
+                <span>!</span>
+            </span>
 
                 <button onclick="this.style.backgroundColor = '#65b57b'" class="btn btn-primary" id="logoutBtn">Logout</button>
        
@@ -21,11 +26,13 @@
 <div>
     <br>
     <br>
+    <br>
+    <br>
     <h1>Reimbursement Requests</h1>
 </div>
 <br>
     <div>
-        <table class="table table-dark">
+        <table class="table table-light">
             <thead>
                 <th>ID</th>
                 <th>Amount</th>
@@ -49,58 +56,74 @@
     </div>
     <br>
     <br>
-    <div>
+    <div style="text-align: left;">
         <!-- <button class="btn btn-primary" id="logoutBtn">Logout</button>  -->
-        <button onclick="this.style.backgroundColor = '#65b57b'" class="btn btn-primary" id="getRequests">Get Full Reimbursement List</button> 
+        <button onclick="this.style.backgroundColor = '#65b57b'" class="btn btn-primary" id="getRequests">Get Full List</button> 
     </div> 
     <br>
     <br> 
-    <div>
-        <h3>Get Reimbursement Request List by Status</h3>
-        <form>
-            <label for="setStatusFilter">Choose a status filter:</label>
-            <div class="row">
-                <div class="col-md-2">
-                    <select class="form-control" id="select2">
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="denied">Denied</option>
-                    </select>
-                </div>
-            </div>
-        </form>
-        <br>
-        <button onclick="this.style.backgroundColor = '#65b57b'" class="btn btn-primary" id="getList">Get List</button> 
-    </div>
-    <br>
-    <br>
-    <div>
-        <h3>Update a Reimbursement Request</h3>
-        <form>
-            <label type="number" for="reimId">Enter the request ID</label>
-            <input type="number" id="reimId" name="reimId" min="0" step="1">
+    <div class="row">
+        <div class="col-md-6 justify-content-center">
+            <h3>Get Reimbursement Request List by Status</h3>
             <br>
-            <label for="id_verify" id="id_verify"></label>
-            <br>
-            <br>
-            <p> Select a status update:
-                <div class="row">
-                    <div class="col-md-2">
-                        <select class="form-control" id="select1">
-                            <option value="pending">Pending</option>
-                            <option value="approved">Approved</option>
-                            <option value="denied">Denied</option>
-                        </select>
+            <form class="form-group">
+                <div class="form-group">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <label class="form-label" for="setStatusFilter">Choose a status filter:</label>
+                            
+                                    <select class="form-control" id="select2">
+                                        <option value="pending">Pending</option>
+                                        <option value="approved">Approved</option>
+                                        <option value="denied">Denied</option>
+                                    </select>
+                            
+                        </div>
                     </div>
                 </div>
-            </p>
-        </form>
-        <div>
-            <button onclick="this.style.backgroundColor = '#65b57b'" class="btn btn-primary" id="updateStatusBtn"> Submit </button>
+            </form>
+            <br>
+            <button onclick="this.style.backgroundColor = '#65b57b'" class="btn btn-primary" id="getList">Get List</button> 
         </div>
-        <p> The updated status is:
-            <span class="output"></span>
-        </p>
+        
+        <div class="col-md-6 align-self-right">
+            <h3>Update a Reimbursement Request</h3>
+            <br>
+            <form class="form-group">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                            <label class="form-label" for="reimId">Enter the reimbursement ID:</label>
+                            <br>
+                            <input class="form-control" type="number" id="reimId" name="reimId" min="0" step="1">
+                            
+                            <label class="form-label" for="id_verify" id="id_verify"></label>
+                    </div>
+                </div>
+                        
+                        
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <label class="form-label" type="number" for="reimId">Select Status Update:</label>
+                                    
+                                            <select class="form-control" id="select1">
+                                                <option value="pending">Pending</option>
+                                                <option value="approved">Approved</option>
+                                                <option value="denied">Denied</option>
+                                            </select>
+                                </div>  
+                            </div>      
+                    
+                
+            </form>
+            <br>
+            <div>
+                <button onclick="this.style.backgroundColor = '#65b57b'" class="btn btn-primary" id="updateStatusBtn"> Submit </button>
+            </div>
+            <br>
+            <p>
+                <span class="output"></span>
+            </p>
+        </div>
     </div>
 
   

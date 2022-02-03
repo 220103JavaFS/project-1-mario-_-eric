@@ -1,4 +1,5 @@
-const url = "http://54.176.76.0:7000/"
+const url = "http://54.176.76.0:7000/" // ec2 URL
+//const url = "http://localhost:7000/" // local URL
 
 if (sessionStorage.getItem("userSession") == null){
     window.location.replace(url + "login.html");
@@ -19,6 +20,7 @@ let loginBtn = document.getElementById("loginBtn");
 let filterUpdate = document.getElementById("#select2");
 let getListBtn = document.getElementById("getList");
 let id_notify = document.getElementById("id_verify");
+let login_name = document.getElementById("loginName");
 
 
 submitBtn.addEventListener("click", setStatus);
@@ -26,6 +28,11 @@ reimBtn.addEventListener("click", getAllRequests);
 logoutBtn.addEventListener("click", logoutFunc);
 getListBtn.addEventListener("click", getAllRequestsById);
 
+// display name of who's logged in
+let user = JSON.parse(sessionStorage.getItem("userSession"));
+login_name.innerHTML = user.firstName + " " + user.lastName;
+
+// logout function
 async function logoutFunc(){
     
   
@@ -46,10 +53,15 @@ async function logoutFunc(){
 }
 
 async function setStatus() {
+
+  // changle button color back
+  reimBtn.style.backgroundColor = "#0275d8";
+  getListBtn.style.backgroundColor = "#0275d8";
+  
    
     // visual feeback of status update choice
     output = statusUpdate.value;
-    document.querySelector('.output').textContent = output;
+    document.querySelector('.output').textContent = "The updated status is: " + output;
 
     let statusId_value = 1;
 
@@ -101,7 +113,10 @@ async function setStatus() {
 
 // get request for reimbursement list
 async function getAllRequests(){
-    
+
+  // change button color back
+  submitBtn.style.backgroundColor = "#0275d8"; 
+  getListBtn.style.backgroundColor = "#0275d8"; 
 
     let response = await fetch(url + "reimbursements", {
       credentials:"include"
@@ -122,6 +137,11 @@ async function getAllRequests(){
 
 // get request for reimbursement list by id
 async function getAllRequestsById(){
+
+  // changle button color back
+  reimBtn.style.backgroundColor = "#0275d8";
+  submitBtn.style.backgroundColor = "#0275d8";
+
   let statusId_value = 1;
   
   if (document.querySelector('#select2').value == "denied"){
@@ -166,7 +186,7 @@ function populateRequests(requests){
           if (data == "dateSubmitted" || data == "dateResolved") {       
             request_data = formatDate(request_data);
           }
-          if (data == "receipt" && request_data != null) {
+          if (data == "receipt" && request_data != null && request_data != ' ') {
             let img = new Image();
             img.src = request_data;
 
@@ -176,7 +196,7 @@ function populateRequests(requests){
 
             img.classList.add("myImg");
             img.id = "myImg";
-            
+
             td.appendChild(img);
             console.log("RECEIPT = " + request_data);
           }

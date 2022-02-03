@@ -14,7 +14,7 @@ public class App {
     public static void main(String[] args) {
         //app = Javalin.create(); // for running tests through postman
 
-        app = Javalin.create((config)->{ // mario run
+        app = Javalin.create((config)->{ // ec2 run
             config.addStaticFiles("FrontEnd", Location.EXTERNAL);
         });
 
