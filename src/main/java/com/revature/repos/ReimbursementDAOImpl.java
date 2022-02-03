@@ -227,7 +227,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
             statement.setTimestamp(++count, r.getDateSubmitted());
             statement.setTimestamp(++count, r.getDateResolved());
             statement.setString(++count, r.getDescription());
-            statement.setBytes(++count, r.getReceipt().getBytes(StandardCharsets.UTF_8));
+            if (r.getReceipt() == null || r.getReceipt().isEmpty()) {
+                statement.setBytes(++count, new byte[0]);
+            } else {
+                statement.setBytes(++count, r.getReceipt().getBytes(StandardCharsets.UTF_8));
+            }
             statement.setInt(++count, r.getAuthorId());
             statement.setInt(++count, r.getResolverId());
             statement.setInt(++count, r.getStatusId());
