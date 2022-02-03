@@ -1,4 +1,4 @@
-const url = "http://54.176.76.0:7002/"
+const url = "http://54.176.76.0:7000/"
 
 if (sessionStorage.getItem("userSession") == null){
     window.location.replace(url + "login.html");

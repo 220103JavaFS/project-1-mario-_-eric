@@ -4,7 +4,7 @@ let loginBtn = document.getElementById("loginBtn");
 let login_verify = document.getElementById("username_verify");
 let pasword_verify = document.getElementById("password_verify");
 
-const url = "http://54.176.76.0:7002/"
+const url = "http://54.176.76.0:7000/"
 
 if (sessionStorage.getItem("userSession") != null){
   let user = JSON.parse(sessionStorage.getItem("userSession"));
