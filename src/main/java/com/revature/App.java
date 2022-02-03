@@ -1,9 +1,6 @@
 package com.revature;
 
 import com.revature.controllers.*;
-import com.revature.models.Reimbursement;
-import com.revature.repos.ReimbursementDAO;
-import com.revature.repos.ReimbursementDAOImpl;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import org.slf4j.Logger;
@@ -33,8 +30,6 @@ public class App {
 
         app.start(7000);
         log.info("started the app!");
-
-
     }
 
     public static void configure(Controller... controllers){
