@@ -32,12 +32,6 @@ async function loginFunc(){
       login_verify.style.color = "red";
       login_verify.innerHTML = "Invalid Username";
       login_verify.style.fontWeight = "bold";
-      let p = document.createElement("div");
-      let break_line = document.createElement("br");
-      document.createTextNode('\u00A0');
-      p.appendChild(break_line);
-      //login_verify.appendChild(break_line);
-
     }
 
     if (user.password == ""){
@@ -50,7 +44,7 @@ async function loginFunc(){
     console.log("User and Pass:" + user.username + " | " + user.password);
 
     let response = await fetch(
-        url+"login",
+        url + "login",
         {
           method : "POST",
           body : JSON.stringify(user),
