@@ -32,7 +32,7 @@ public class App {
         configure(new ReimbursementController(),
                 new LoginController());
 
-        app.start(7000);
+        app.start(7002);
         log.info("started the app!");
 
 
