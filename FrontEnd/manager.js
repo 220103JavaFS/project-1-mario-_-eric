@@ -1,5 +1,5 @@
-//const url = "http://54.176.76.0:7000/" // ec2 URL
-const url = "http://localhost:7000/" // local URL
+const url = "http://54.176.76.0:7000/" // ec2 URL
+//const url = "http://localhost:7000/" // local URL
 
 if (sessionStorage.getItem("userSession") == null){
     window.location.replace(url + "login.html");
