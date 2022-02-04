@@ -18,20 +18,7 @@ if (sessionStorage.getItem("userSession") != null){
 
 loginBtn.addEventListener("click", loginFunc);
 
-//press enter instead of click the button to login
-async function keyListener(loginFunc) {
-  if (loginFunc.defaultPrevented) {
-      return;
-  }
 
-  let key = loginFunc.key || loginFunc.keyCode;
-
-  if (key === 27) {
-      loginFunc();
-  }
-}
-document.addEventListener('keyup', keyListener);
-//press enter instead of click the button to login
 
 
 async function loginFunc(){
