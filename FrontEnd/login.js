@@ -18,6 +18,14 @@ if (sessionStorage.getItem("userSession") != null){
 
 loginBtn.addEventListener("click", loginFunc);
 
+//press enter instead of click the button to login
+loginBtn.addEventListener("keyup", function(loginFunc) {
+  if (loginFunc.key === 13) {
+      loginFunc.preventDefault();
+      document.getElementById("loginBtn").click();
+  }
+});
+
 async function loginFunc(){
     let user = {
         username: usernameBox.value,
