@@ -16,10 +16,10 @@ if (sessionStorage.getItem("userSession") != null){
   }
 }  
 
-loginBtn.addEventListener("click", loginFunc);
+//loginBtn.addEventListener("click", loginFunc);
 
 //press enter instead of click the button to login
-function keyListener(loginFunc) {
+async function keyListener(loginFunc) {
   if (loginFunc.defaultPrevented) {
       return;
   }
