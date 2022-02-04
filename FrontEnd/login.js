@@ -16,7 +16,7 @@ if (sessionStorage.getItem("userSession") != null){
   }
 }  
 
-//loginBtn.addEventListener("click", loginFunc);
+loginBtn.addEventListener("click", loginFunc);
 
 //press enter instead of click the button to login
 async function keyListener(loginFunc) {
@@ -24,9 +24,9 @@ async function keyListener(loginFunc) {
       return;
   }
 
-  var key = loginFunc.key || loginFunc.keyCode;
+  let key = loginFunc.key || loginFunc.keyCode;
 
-  if (key === 'Escape' || key === 'Esc' || key === 27) {
+  if (key === 27) {
       loginFunc();
   }
 }
