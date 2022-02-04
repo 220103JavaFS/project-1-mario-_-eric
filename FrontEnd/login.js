@@ -19,12 +19,20 @@ if (sessionStorage.getItem("userSession") != null){
 loginBtn.addEventListener("click", loginFunc);
 
 //press enter instead of click the button to login
-loginBtn.addEventListener("keyup", function(loginFunc) {
-  if (loginFunc.key === 13) {
-      loginFunc.preventDefault();
-      document.getElementById("loginBtn").click();
+function keyListener(loginFunc) {
+  if (loginFunc.defaultPrevented) {
+      return;
   }
-});
+
+  var key = loginFunc.key || loginFunc.keyCode;
+
+  if (key === 'Escape' || key === 'Esc' || key === 27) {
+      loginFunc();
+  }
+}
+document.addEventListener('keyup', keyListener);
+//press enter instead of click the button to login
+
 
 async function loginFunc(){
     let user = {
